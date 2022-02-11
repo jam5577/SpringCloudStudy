@@ -1,0 +1,32 @@
+server:
+  port: 8845
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/sys_plus?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true
+    username: root
+    password: "041700"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    port: 465
+    host: smtp.qq.com
+    username: 806420570@qq.com
+    password: kwbijzjwrxwobajh
+    from: 806420570@qq.com
+    default-encoding: utf-8
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          startlls:
+            enable: true
+            required: true
+
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
