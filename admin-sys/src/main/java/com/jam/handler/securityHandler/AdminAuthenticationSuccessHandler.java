@@ -1,14 +1,13 @@
-package com.jam.handler;
+package com.jam.handler.securityHandler;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jam.dto.UserInfoDTO;
+import com.jam.dto.UserDTO;
 import com.jam.entity.User;
-import com.jam.handler.result.Result;
-import com.jam.handler.result.ResultInfo;
+import com.jam.enums.ResultInfo;
+import com.jam.handler.Result;
 import com.jam.mapper.UserMapper;
 import com.jam.utils.UserUtil;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -16,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -30,38 +28,28 @@ import java.util.Date;
  **/
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AdminAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-//    @Autowired
     private final UserMapper userMapper;
 
-//    @Autowired
-//    public AdminAuthenticationSuccessHandler(UserMapper userMapper) {
-//        this.userMapper = userMapper;
-//    }
+    @Autowired
+    public AdminAuthenticationSuccessHandler(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        UserInfoDTO principal = (UserInfoDTO) authentication.getPrincipal();
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        UserDTO principal = (UserDTO) authentication.getPrincipal();
         log.info(JSON.toJSONString(principal));
         updateUser();
-//        int i = userMapper.update(new User(),new LambdaUpdateWrapper<User>()
-//                                    .eq(User::getId,principal.getUserId())
-//                                    .set(User::getUpdateTime,new Date()));
-//        Result<Object> x = i > 0 ? new Result<>().success(ResultInfo.SUCCESS) : new Result<>().error(ResultInfo.ERROR);
-//        System.out.println(x);
-//        log.info("用户更改登录时间结果为{}",x);
-        Result result = new Result<>();
         response.setContentType("application/json;charset=UTF-8");
-        String s = new ObjectMapper().writeValueAsString(result.resultData(ResultInfo.LOGIN_SUCCESS));
+        String s = new ObjectMapper().writeValueAsString(Result.success(ResultInfo.LOGIN_SUCCESS,principal));
         response.getWriter().println(s);
-        response.sendRedirect("/index");
     }
 
     @Async
     public void updateUser(){
-        UserInfoDTO userInfo = UserUtil.getUserInfoDTO();
+        UserDTO userInfo = UserUtil.getUserInfoDTO();
         System.out.println(userInfo);
         User user = User.builder()
                 .id(UserUtil.getUserInfoDTO().getUserId())

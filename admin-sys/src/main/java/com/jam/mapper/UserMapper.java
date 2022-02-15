@@ -12,17 +12,10 @@ import java.util.List;
  * </p>
  *
  * @author jam
- * @since 2022-01-26
+ * @since 2022-02-13
  */
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 
-    //1、新增用户
-//    int createUser(User user);
-    //2、根据用户查找用户角色
     List<String> findRoleById(Integer id);
-    //3、删除用户
-
-    //4、更新用户
-
 }

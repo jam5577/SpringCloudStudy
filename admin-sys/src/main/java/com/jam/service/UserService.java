@@ -9,8 +9,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author jam
- * @since 2022-01-26
+ * @since 2022-02-13
  */
 public interface UserService extends IService<User> {
+
+    /**
+     * 验证码生成接口
+     */
+    String generateCode();
 
 }

@@ -1,11 +1,12 @@
-package com.jam.handler;
+package com.jam.handler.securityHandler;
 
-import com.jam.handler.result.Result;
+import com.jam.enums.ExceptionType;
+import com.jam.handler.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -16,13 +17,13 @@ import java.io.IOException;
  * @create: 2022-01-21 17:10
  **/
 @Slf4j
+@Component
 public class AdminSessionStrategy implements SessionInformationExpiredStrategy {
     @Override
-    public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
+    public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException {
         log.debug("用户被踢出");
-        Result<Object> result = new Result<>();
         HttpServletResponse response = event.getResponse();
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().print(result.resultData(405,"用户被踢出"));
+        response.getWriter().print(Result.error(ExceptionType.USER_KICKED_OUT));
     }
 }

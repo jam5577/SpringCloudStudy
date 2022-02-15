@@ -1,16 +1,16 @@
 package com.jam.service;
 
-import com.jam.entity.UserInfo;
+import com.jam.entity.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 系统菜单 服务类
  * </p>
  *
  * @author jam
- * @since 2022-01-26
+ * @since 2022-02-13
  */
-public interface UserInfoService extends IService<UserInfo> {
+public interface MenuService extends IService<Menu> {
 
 }

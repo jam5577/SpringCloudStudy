@@ -42,7 +42,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
          */
         corsRegistry.addMapping("/**")
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:8080","true")
+                .allowedOrigins("http://localhost:8013","http://192.168.192.1:8013/","true")
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .allowedHeaders("*")
                 .maxAge(3600);

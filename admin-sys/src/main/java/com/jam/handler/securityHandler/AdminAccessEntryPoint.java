@@ -1,12 +1,12 @@
-package com.jam.handler;
+package com.jam.handler.securityHandler;
 
-import com.jam.handler.result.Result;
-import com.jam.handler.result.ResultInfo;
+import com.jam.enums.ExceptionType;
+import com.jam.handler.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -18,12 +18,12 @@ import java.io.IOException;
  * @create: 2022-01-21 17:00
  **/
 @Slf4j
+@Component
 public class AdminAccessEntryPoint implements AuthenticationEntryPoint {
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        Result<Object> result = new Result<>();
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json;charset=utf-8");
-        response.getWriter().print(result.resultData(ResultInfo.ANONYMOUS_ENTRY,authException));
+        response.getWriter().print(Result.error(ExceptionType.ANONYMOUS_ENTRY,authException));
     }
 }

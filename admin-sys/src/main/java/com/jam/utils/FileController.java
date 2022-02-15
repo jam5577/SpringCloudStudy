@@ -1,7 +1,7 @@
 package com.jam.utils;
 
-import com.jam.handler.result.Result;
-import com.jam.handler.result.ResultInfo;
+import com.jam.handler.Result;
+import com.jam.enums.ResultInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -58,7 +58,7 @@ public class FileController {
                 }
             }
         } catch (Exception e) {
-            return new Result<>().error(ResultInfo.ERROR);
+            return Result.error();
         }
         return new Result<>().success(ResultInfo.SUCCESS);
     }
@@ -86,13 +86,13 @@ public class FileController {
             is = new FileInputStream(f);
             if (is == null) {
                 log.error("下载附件失败，请检查文件“" + fileName + "”是否存在");
-                return new Result<>().error(ResultInfo.ERROR);
+                return Result.error();
             }
             //复制
             IOUtils.copy(is, response.getOutputStream());
             response.getOutputStream().flush();
         } catch (IOException e) {
-            return new Result<>().error(ResultInfo.ERROR);
+            return Result.error();
         }
         //文件的关闭放在finally中
         finally

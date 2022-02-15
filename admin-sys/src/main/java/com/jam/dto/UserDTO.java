@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  **/
 @Data
 @Builder
-public class UserInfoDTO implements UserDetails {
+public class UserDTO implements UserDetails {
 
     private Integer userId;
 

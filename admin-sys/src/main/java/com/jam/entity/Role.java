@@ -1,8 +1,6 @@
 package com.jam.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author jam
- * @since 2022-01-26
+ * @since 2022-02-13
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -24,10 +22,6 @@ import lombok.EqualsAndHashCode;
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-      @ApiModelProperty(value = "用户角色id")
-        @TableId(value = "id", type = IdType.AUTO)
-      private Integer id;
 
       @ApiModelProperty(value = "用户角色名称")
       private String roleName;

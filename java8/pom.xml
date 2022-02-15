@@ -52,6 +52,10 @@
             <artifactId>easyexcel</artifactId>
             <version>3.0.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
     </dependencies>
 
 
