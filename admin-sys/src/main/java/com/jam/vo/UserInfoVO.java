@@ -2,7 +2,6 @@ package com.jam.vo;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
-import com.jam.handler.converter.GenderConverter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,7 +34,7 @@ public class UserInfoVO {
     @ApiModelProperty(value = "个性签名")
     private String signature;
 
-    @ExcelProperty(value = {"用户信息表","性别"},converter = GenderConverter.class)
+    @ExcelProperty(value = {"用户信息表","性别"})
     @ApiModelProperty(value = "性别，0为男，1为女")
     private Boolean gender;
 

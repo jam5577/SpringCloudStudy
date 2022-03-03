@@ -26,11 +26,10 @@ import java.util.stream.Stream;
 
 public class MyTest {
 
+    //region 测试lambda表达式
     @Test
     public void testLambda(){
-        /**
-         * 匿名内部类可以直接new一个接口，并在new出来的接口函数后加上{}表示重写这个接口里的方法
-         */
+        //匿名内部类可以直接new一个接口，并在new出来的接口函数后加上{}表示重写这个接口里的方法
         Comparator<Integer> comparator = new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
@@ -85,7 +84,9 @@ public class MyTest {
         Runnable runnable1 = () -> System.out.println("这是lambda表达式");
         runnable1.run();
     }
+    //endregion
 
+    //region 测试方法式接口
     public Integer operation(Integer a, Integer b, MyInterface myFun){
         return myFun.count(a, b);
     }
@@ -104,7 +105,9 @@ public class MyTest {
         Integer result = operation(1, 2, (x, y) -> x + y);
         System.out.println(result);
     }
+    //endregion
 
+    //region 测试java8方法引用
     @Test
     public void testReference(){
         /**
@@ -133,8 +136,9 @@ public class MyTest {
 
         Supplier<List> sup2 = ArrayList::new;
     }
+    //endregion
 
-    //以下皆为流相关操作
+    //region 流相关操作
     @Test
     public void testStream(){
         /**
@@ -210,7 +214,9 @@ public class MyTest {
                 .skip(1)//舍弃前1个元素
                 .forEach(System.out::println);
     }
+    //endregion
 
+    //region java8的forEach操作
     @Test
     public void testForEach(){
         /**
@@ -240,7 +246,9 @@ public class MyTest {
             System.out.print(e + " ");
         });
     }
+    //endregion
 
+    //region 测试java8的流中map方法
     public Stream<Character> filterCharacter(String str){
         List<Character> list = new ArrayList<>();
         for (char c : str.toCharArray()) {
@@ -277,7 +285,9 @@ public class MyTest {
                 .flatMap(test::filterCharacter)
                 .forEach(System.out::print);
     }
+    //endregion
 
+    //region 测试java8排序算法
     @Test
     public void testSort(){
         /**
@@ -305,7 +315,9 @@ public class MyTest {
                 })
                 .forEach(System.out::println);
     }
+    //endregion
 
+    //region java8流测试match方法
     public enum Status {
         FREE, BUSY, VOCATION;
     }
@@ -359,7 +371,9 @@ public class MyTest {
                 .count();
         System.out.println(count);
     }
+    //endregion
 
+    //region 测试java8流以及lambada
     @Test
     public void testCollect(){
         /**
@@ -464,7 +478,9 @@ public class MyTest {
                 .collect(Collectors.joining("-")); //可传入分隔符
         System.out.println(str);
     }
+    //endregion
 
+    //region 测试java流stream
     @Test
     public void testCase(){
         /**
@@ -490,7 +506,9 @@ public class MyTest {
                 .reduce(Integer::sum);
         System.out.println(reduce);
     }
+    //endregion
 
+    //region 测试java8的Optional类
     @Test
     public void testOptional(){
         /**
@@ -519,7 +537,9 @@ public class MyTest {
             Employee employee3 = op3.get();
         }
     }
+    //endregion
 
+    //region 时间操作相关工具
     @Test
     public void testDate(){
         /**
@@ -616,8 +636,9 @@ public class MyTest {
         LocalDateTime newDate = ldt1.parse(str1, dtf1);
         System.out.println(newDate);
     }
+    //endregion
 
-    //重复注解
+    //region 重复注解
     @Test
     @MyAnnotation("Hello ")
     @MyAnnotation("World")
@@ -630,6 +651,7 @@ public class MyTest {
             System.out.print(ma.value());
         }
     }
+    //endregion
     /**
      * Check whether the given {@code CharSequence} contains actual <em>text</em>.
      * <p>More specifically, this method returns {@code true} if the
@@ -642,7 +664,7 @@ public class MyTest {
      * StringUtils.hasText("12345") = true
      * StringUtils.hasText(" 12345 ") = true
      * </pre>
-     * @param str the {@code CharSequence} to check (may be {@code null})
+     * the {@code CharSequence} to check (may be {@code null})
      * @return {@code true} if the {@code CharSequence} is not {@code null},
      * its length is greater than 0, and it does not contain whitespace only
      * @see Character#isWhitespace
@@ -650,6 +672,119 @@ public class MyTest {
     @Test
     @OptDate
     public void testAnno(){
+    }
 
+
+    //region 测试String工具类
+    @Test
+    public void testString(){
+        /**
+         *  String类是不可变类，即一旦一个String对象被创建以后，
+         * 包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。
+         */
+        String a = "123";
+        //可以看出来，再次给a赋值时，并不是对原来堆中实例对象进行重新赋值，
+        //而是生成一个新的实例对象，并且指向“456”这个字符串，a则指向最新生成的实例对象，
+        //之前的实例对象仍然存在，如果没有被再次引用，则会被垃圾回收。
+        a = "456";
+        // 打印出来的a为456
+        System.out.println(a);
+        //StringBuffer对象则代表一个字符序列可变的字符串，
+        //当一个StringBuffer被创建以后，
+        //通过StringBuffer提供的append()、insert()、reverse()、setCharAt()、setLength()
+        //等方法可以改变这个字符串对象的字符序列。一旦通过StringBuffer生成了最终想要的字符串，
+        //就可以调用它的toString()方法将其转换为一个String对象。
+        //StringBuffer对象是一个字符序列可变的字符串，它没有重新生成一个对象，而且在原来的对象中可以连接新的字符串。
+        StringBuffer b = new StringBuffer("123");
+        System.out.println(b.indexOf("2"));
+        String b1 = "123";
+        System.out.println(b1.indexOf("2"));
+        b.append("456");
+        // b打印结果为：123456
+        System.out.println(b.toString());
+
+        //StringBuilder类也代表可变字符串对象。实际上，StringBuilder和StringBuffer基本相似，
+        // 两个类的构造器和方法也基本相同。不同的是：
+        // StringBuffer是线程安全的，而StringBuilder则没有实现线程安全功能，所以性能略高。
+        //StringBuffer类中的方法都添加了synchronized关键字，也就是给这个方法添加了一个锁，用来保证线程安全。
+        StringBuilder c = new StringBuilder("222");
+
+    }
+    //endregion
+
+    @Test
+    public void test3(){
+        MyInterface test = new testAbstract.test();
+        System.out.println(test.count(1,3));
+        List<String> list = new ArrayList<>();
+        String s = "abc";
+        System.out.println(s.substring(0, 2));
+
+    }
+
+    @Test
+    public void rotate() {
+        int[] nums= {1, 2, 3, 4, 5, 6, 7};
+        int k=3;
+        int i=0;
+        if(k==nums.length){
+            System.out.println(Arrays.toString(nums));
+        }
+        if (k>nums.length){
+            if (k % nums.length != 0) {
+                while (i < k) {
+                    System.arraycopy(nums, 0, nums, 1, nums.length - 1);
+                    nums[0] = nums[nums.length - 1];
+                    i++;
+                }
+            }
+            System.out.println(Arrays.toString(nums));
+        }
+        String s="We are happy.";
+        String replace = s.replace(" ", "%20");
+        System.out.println(replace);
+        ArrayList<Integer> list = new ArrayList<>();
+        ListNode node = new ListNode();
+        ListNode pre = null;
+        ListNode cur = node;
+        ListNode next = null;
+        while (cur!=null){
+            next=cur.next;
+            cur.setNext(pre);
+            pre=cur;
+            list.add(pre.val);
+            cur=next;
+        }
+        int[] ints = {list.size()};
+        for (int j = 0; j < list.size(); j++) {
+            ints[j]=list.get(j);
+        }
+        System.out.println(Arrays.toString(ints));
+    }
+    static class ListNode{
+        int val;
+        ListNode next;
+        ListNode(int val){
+            this.val=val;
+        }
+        ListNode(){
+
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public void setVal(int val) {
+            this.val = val;
+        }
+
+        public ListNode getNext() {
+            return next;
+        }
+
+        public void setNext(ListNode next) {
+            this.next = next;
+        }
     }
 }

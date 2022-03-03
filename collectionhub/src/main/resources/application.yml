@@ -1,0 +1,35 @@
+spring:
+  thymeleaf:
+    suffix: .html
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/sys_plus?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true
+    username: root
+    password: "041700"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    database: 0
+    port: 6379
+    host: localhost
+    password:
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 9000
+
+doc:
+  config:
+    title: "个人收藏网站"
+    description: "springboot+mybatis-plus+"
+    version: "v1.0"
+    serviceUrl: "www.bilibili.com"
+    license: "no license"
+    licenseUrl: "www.bilibili.com"
+    name: "jam"
+    url: "www.bilibili.com"
+    email: "806420570@qq.com"

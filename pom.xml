@@ -12,6 +12,9 @@
         <module>java8</module>
         <module>common</module>
         <module>excel-operation</module>
+        <module>collectionhub</module>
+        <module>jsoup</module>
+        <module>seckill</module>
     </modules>
 
     <!--统一版本管理-->
@@ -33,8 +36,10 @@
         <thymeleaf-sercurity.version>3.0.4.RELEASE</thymeleaf-sercurity.version>
         <fastjson.version>1.2.75</fastjson.version>
         <velocity.version>1.7</velocity.version>
-        <knife4j.version>3.0.1</knife4j.version>
+        <knife4j.version>2.0.6</knife4j.version>
         <druid.version>1.2.8</druid.version>
+        <jsoup.version>1.10.2</jsoup.version>
+        <hutool.version>5.7.20</hutool.version>
     </properties>
 
     <!--统一依赖管理-->
@@ -117,6 +122,16 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

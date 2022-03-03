@@ -1,26 +1,17 @@
 package com.jam.controller;
 
 
-import com.alibaba.excel.EasyExcel;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.jam.api.UserInfoApi;
-import com.jam.entity.MailSender;
-import com.jam.entity.UserInfo;
 import com.jam.mapper.UserInfoMapper;
 import com.jam.utils.EmailUtils;
-import com.jam.vo.UserInfoVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -47,21 +38,21 @@ public class UserInfoController {
 //    private static final String filename = path + UUID.randomUUID() + ".xlsx";
 
 
-    private List<UserInfoVO> data(){
-        List<UserInfoVO> list = new ArrayList<>();
-        UserInfoVO userInfoVO = new UserInfoVO();
-        List<UserInfo> userInfos = userInfoMapper.selectList(new LambdaQueryWrapper<>());
-        for (UserInfo userInfo : userInfos) {
-            BeanUtils.copyProperties(userInfo,userInfoVO);
-            list.add(userInfoVO);
-        }
-        return list;
-    }
+//    private List<UserInfoVO> data(){
+//        List<UserInfoVO> list = new ArrayList<>();
+//        UserInfoVO userInfoVO = new UserInfoVO();
+//        List<UserInfo> userInfos = userInfoMapper.selectList(new LambdaQueryWrapper<>());
+//        for (UserInfo userInfo : userInfos) {
+////            BeanUtils.copyProperties(userInfo,userInfoVO);
+//            list.add(userInfoVO);
+//        }
+//        return list;
+//    }
 
     @RequestMapping(UserInfoApi.DOWNLOAD_API)
     public void Write(HttpServletResponse response) throws IOException {
         setExcelRespProp(response,UUID.randomUUID().toString());
-        EasyExcel.write(response.getOutputStream(),UserInfoVO.class).sheet(this.getClass().getName()).doWrite(data());
+//        EasyExcel.write(response.getOutputStream(),UserInfoVO.class).sheet(this.getClass().getName()).doWrite(data());
     }
 
     @RequestMapping(UserInfoApi.SIMPLE_EMAIL)

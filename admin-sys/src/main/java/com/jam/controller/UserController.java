@@ -3,11 +3,7 @@ package com.jam.controller;
 
 import com.jam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -34,5 +30,9 @@ public class UserController {
         return userService.generateCode();
     }
 
+    @GetMapping("/doc.html")
+    public String doc(){
+        return "doc.html";
+    }
 }
 

@@ -12,6 +12,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/springboot-security-web/pom.xml" />
         <option value="$PROJECT_DIR$/admin-sys/pom.xml" />
+        <option value="$PROJECT_DIR$/music/pom.xml" />
+        <option value="$PROJECT_DIR$/seckill/pom.xml" />
       </list>
     </option>
   </component>
