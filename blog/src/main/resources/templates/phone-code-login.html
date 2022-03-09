@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../static/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../static/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                </div>
+                                <form class="user">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user"
+                                               id="InputUsername" placeholder="请输入手机号">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                            <input type="password" class="form-control form-control-user"
+                                                   id="InputPassword" placeholder="请输入验证码">
+                                            <button type="button" class="btn btn-default"
+                                                    style="border: #0b5ed7 1rem;color: #0b5ed7;width: 200px;font-style: normal">
+                                                <span>发送验证码</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <input type="submit" id="btn" class="btn btn-primary btn-user btn-block"
+                                           value="登录"/>
+                                </form>
+                                <hr>
+                                <br>
+                                <br>
+                                <div class="text-center">
+                                    <a class="small" href="login.html">使用账号密码登录！</a>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="text-center">
+                                    <a class="small" href="register.html">创建新账户！</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="../static/assets/vendor/jquery/jquery.min.js"></script>
+<script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="../static/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/static/assets/js/main.js}"></script>
+<script>
+    $(document).ready(() => {
+        $("#btn").click(() => {
+            const username = document.getElementById("InputUsername").value;
+            const password = document.getElementById("InputPassword").value;
+            $.get("login.json", (data, status) => {
+                if (username != null && data.username == username && data.password == password) {
+                    window.alert("登录成功");
+                    $(location).attr('href', 'index.html');
+                    window.sessionStorage.setItem("username", username);
+                } else {
+                    window.alert("登录失败")
+                }
+            })
+        })
+    })
+</script>
+
+</body>
+
+</html>

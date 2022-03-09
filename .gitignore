@@ -6,6 +6,8 @@
 /collectionhub/target/
 /.idea/
 /SpringCloudStudy.iml/
+/blog/target/
+/blog/blog.iml/
 #java
 *.class
 

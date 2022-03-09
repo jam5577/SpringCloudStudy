@@ -14,7 +14,8 @@
         <module>excel-operation</module>
         <module>collectionhub</module>
         <module>jsoup</module>
-        <module>seckill</module>
+        <module>cplex</module>
+        <module>blog</module>
     </modules>
 
     <!--统一版本管理-->
@@ -93,11 +94,11 @@
                 <artifactId>spring-boot-starter-security</artifactId>
                 <version>${springsercurity.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-<!--                <version>${thymeleaf.version}</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.springframework.boot</groupId>-->
+            <!--                <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+            <!--                <version>${thymeleaf.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.thymeleaf.extras</groupId>
                 <artifactId>thymeleaf-extras-springsecurity5</artifactId>

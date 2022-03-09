@@ -7,17 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="blog" />
         <module name="collectionhub" />
         <module name="admin-sys" />
         <module name="java8" />
         <module name="excel-operation" />
         <module name="jsoup" />
-        <module name="seckill" />
+        <module name="cplex" />
         <module name="springboot-security-web" />
         <module name="common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="seckill" target="1.8" />
       <module name="springcloud-eureka" target="1.8" />
       <module name="wallbreaker-plus" target="1.8" />
     </bytecodeTargetLevel>

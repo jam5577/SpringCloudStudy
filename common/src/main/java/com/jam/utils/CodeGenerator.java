@@ -42,18 +42,18 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
 //        String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("D:\\WebProject\\SpringCloudStudy\\seckill" + "/src/main/java");
+        gc.setOutputDir("D:\\WebProject\\SpringCloudStudy\\blog" + "/src/main/java");
         gc.setAuthor("jam");
         gc.setOpen(false);
         gc.setSwagger2(true); //实体属性 Swagger2 注解
         gc.setServiceName("%sService");
-//        gc.setIdType(IdType.AUTO)
-        gc.setDateType(DateType.SQL_PACK);
+//        gc.setIdType(IdType.AUTO);
+        gc.setDateType(DateType.ONLY_DATE);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true");
+        dsc.setUrl("jdbc:mysql://localhost:3306/sys_blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");

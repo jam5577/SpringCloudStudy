@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop" />
     <option name="OTHER_OPTIONS" value="-encoding UTF-8 -charset UTF-8" />
@@ -13,7 +16,6 @@
         <option value="$PROJECT_DIR$/springboot-security-web/pom.xml" />
         <option value="$PROJECT_DIR$/admin-sys/pom.xml" />
         <option value="$PROJECT_DIR$/music/pom.xml" />
-        <option value="$PROJECT_DIR$/seckill/pom.xml" />
       </list>
     </option>
   </component>
