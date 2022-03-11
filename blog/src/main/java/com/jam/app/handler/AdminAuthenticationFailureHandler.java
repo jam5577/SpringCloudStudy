@@ -1,8 +1,8 @@
-package com.jam.handler.securityHandler;
+package com.jam.app.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jam.enums.ExceptionType;
-import com.jam.handler.Result;
+import com.jam.base.exception.ExceptionType;
+import com.jam.base.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -28,8 +27,8 @@ public class AdminAuthenticationFailureHandler implements AuthenticationFailureH
         response.setContentType("application/json;charset=UTF-8");
         String s = new ObjectMapper().writeValueAsString(Result.error(ExceptionType.LOGIN_FAILURE, exception));
 //        response.getWriter().println(s);
-        HttpSession session = request.getSession();
-        session.setAttribute("exception", s);
+        request.setAttribute("exception", s);
+        response.sendError(1, s);
         throw exception;
     }
 }

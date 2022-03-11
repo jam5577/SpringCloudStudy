@@ -1,13 +1,13 @@
-package com.jam.handler.securityHandler;
+package com.jam.app.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jam.dto.UserDTO;
-import com.jam.entity.User;
-import com.jam.enums.ResultInfo;
-import com.jam.handler.Result;
-import com.jam.mapper.UserMapper;
-import com.jam.utils.UserUtil;
+import com.jam.app.dto.UserDTO;
+import com.jam.app.entity.User;
+import com.jam.app.mapper.UserMapper;
+import com.jam.app.utils.UserUtil;
+import com.jam.base.result.Result;
+import com.jam.base.result.ResultInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -44,7 +44,8 @@ public class AdminAuthenticationSuccessHandler implements AuthenticationSuccessH
         updateUser();
         response.setContentType("application/json;charset=UTF-8");
         String s = new ObjectMapper().writeValueAsString(Result.success(ResultInfo.LOGIN_SUCCESS, principal));
-        response.getWriter().println(s);
+//        response.getWriter().println(s);
+//        response.addCookie(new Cookie("result", s));
         response.sendRedirect("/index");
     }
 
@@ -53,7 +54,6 @@ public class AdminAuthenticationSuccessHandler implements AuthenticationSuccessH
         UserDTO userInfo = UserUtil.getUserInfoDTO();
         System.out.println(userInfo);
         User user = User.builder()
-                .id(UserUtil.getUserInfoDTO().getUserId())
                 .ipAddress(UserUtil.getUserInfoDTO().getIpAddress())
                 .updateTime(new Date())
                 .build();

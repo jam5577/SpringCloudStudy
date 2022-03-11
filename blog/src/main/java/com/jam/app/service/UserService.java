@@ -2,7 +2,10 @@ package com.jam.app.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jam.app.entity.User;
+import com.jam.app.vo.UserVO;
 import com.jam.base.result.Result;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,4 +22,7 @@ public interface UserService extends IService<User> {
      */
     Result<Void> register(User user);
 
+    Result<String> login(User user);
+
+    List<UserVO> getUserList();
 }

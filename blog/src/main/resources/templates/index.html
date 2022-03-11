@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
@@ -211,14 +212,18 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="../static/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    <!--                    <img th:src="${image}==null ? '../static/assets/img/profile-img.jpg' : @{${image}}"-->
+                    <img th:src="@{${image}}"
+                         src="../static/assets/img/profile-img.jpg" alt="Profile"
+                         class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2" sec:authentication="principal.username">K. Anderson</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
-                        <span>Web Designer</span>
+                        <h6 sec:authentication="principal.username">Kevin Anderson</h6>
+                        <span th:text="${nickname}">Web Designer</span>
+                        <i class="ri-at-line ri-align-center"><span th:text="${email}"></span></i>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -235,7 +240,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/profile}">
                             <i class="bi bi-gear"></i>
                             <span>Account Settings</span>
                         </a>
@@ -255,7 +260,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>
@@ -399,7 +404,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a th:href="@{/tables-data}">
                         <i class="bi bi-circle"></i><span>Data Tables</span>
                     </a>
                 </li>

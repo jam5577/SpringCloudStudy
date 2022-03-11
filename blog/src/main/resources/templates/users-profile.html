@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -526,10 +526,12 @@
 
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-                        <img src="../static/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2>Kevin Anderson</h2>
+                        <img th:src="@{${image}}" src="../static/assets/img/profile-img.jpg" alt="Profile"
+                             class="rounded-circle">
+                        <h2 th:text="${nickname}">Kevin Anderson</h2>
                         <h3>Web Designer</h3>
+                        <h3 th:text="'your ipAddress is '+${ipAddress}"></h3>
+                        <i class="ri-zhihu-fill"><span th:text="${email}"></span></i>
                         <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -577,7 +579,8 @@
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                 <h5 class="card-title">About</h5>
-                                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores
+                                <p class="small fst-italic" th:text="${signature}">Sunt est soluta temporibus
+                                    accusantium neque nam maiores
                                     cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure
                                     rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at
                                     unde.</p>

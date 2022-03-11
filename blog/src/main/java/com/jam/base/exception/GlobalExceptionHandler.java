@@ -4,12 +4,14 @@ import com.jam.base.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @program: PureEcho
@@ -36,5 +38,15 @@ public class GlobalExceptionHandler {
         return Result.error(exceptionEnum);
     }
 
+    @ExceptionHandler(value = UserException.class)
+    @ResponseBody
+    public void exception(Model model, HttpServletRequest request, UserException e) {
+        log.info("异常信息为:{},异常URI为:{},来源为{}", e.getMessage(), request.getRequestURI(), e.getClass().getName());
+        HttpSession session = request.getSession();
+        model.addAttribute("exception", e.getMessage());
+        log.info("model:{}", model.getAttribute("exception"));
+        session.setAttribute("exception", e.getMessage());
+        log.info("session:{}", session.getAttribute("exception"));
+    }
 
 }

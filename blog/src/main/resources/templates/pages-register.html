@@ -62,19 +62,21 @@
                                 <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
                                     <p class="text-center small">Enter your personal details to create account</p>
+                                    <p class="text-center small" th:text="${exception}"></p>
                                 </div>
 
-                                <form class="row g-3 needs-validation" novalidate>
+                                <form class="row g-3 needs-validation" novalidate th:action="@{/user/register}"
+                                      method="post">
                                     <div class="col-12">
-                                        <label for="yourName" class="form-label">Your Name</label>
-                                        <input type="text" name="name" class="form-control" id="yourName" required>
+                                        <label for="nickname" class="form-label">Your Name</label>
+                                        <input type="text" name="name" class="form-control" id="nickname" required>
                                         <div class="invalid-feedback">Please, enter your name!</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourEmail" class="form-label">Your Email</label>
-                                        <input type="email" name="email" class="form-control" id="yourEmail" required>
-                                        <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                        <label for="email" class="form-label">Your Email</label>
+                                        <input type="email" name="email" class="form-control" id="email" required>
+                                        <div class="invalid-feedback">Please enter a valid Email address!</div>
                                     </div>
 
                                     <div class="col-12">
@@ -106,7 +108,7 @@
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100"
                                                 id="register"
-                                                type="submit" onclick="register()">Create
+                                                type="submit">Create
                                             Account
                                         </button>
                                     </div>
@@ -155,16 +157,19 @@
 
 </body>
 
-<script>
-    $("#register").click(function () {
-        $.post("http://localhost:8888/user/register",
-            {
-                username: $("#username").val(),
-                password: $("#password").val(),
-                nickname: $("#yourName").val(),
-                email: $("#yourEmail").val(),
-            });
-    });
-</script>
+<!--<script>-->
+<!--    $("#register").click(function () {-->
+<!--        $.post("http://localhost:8888/user/register",-->
+<!--            {-->
+<!--                username: $("#username").val(),-->
+<!--                password: $("#password").val(),-->
+<!--                nickname: $("#yourName").val(),-->
+<!--                email: $("#yourEmail").val(),-->
+<!--            },-->
+<!--            function () {-->
+<!--                $(location).attr('href', '/index');-->
+<!--            });-->
+<!--    });-->
+<!--</script>-->
 
 </html>
