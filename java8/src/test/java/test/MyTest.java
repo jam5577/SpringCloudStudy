@@ -5,6 +5,9 @@ import com.jam.anno.OptDate;
 import dao.MyInterface;
 import entity.Employee;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.io.PrintStream;
 import java.lang.reflect.Method;
@@ -24,18 +27,23 @@ import java.util.stream.Stream;
  * @create: 2022-01-23 23:55
  **/
 
+@Component
 public class MyTest {
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     //region 测试lambda表达式
     @Test
-    public void testLambda(){
+
+    public void testLambda() {
         //匿名内部类可以直接new一个接口，并在new出来的接口函数后加上{}表示重写这个接口里的方法
         Comparator<Integer> comparator = new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                o1=1;
-                o2=0;
-                return Integer.compare(o1,o2);
+                o1 = 1;
+                o2 = 0;
+                return Integer.compare(o1, o2);
             }
 
             @Override
@@ -49,7 +57,7 @@ public class MyTest {
     }
 
     @Test
-    public void testLambda1(){
+    public void testLambda1() {
         /**
          * Lambda 表达式，可以创建匿名函数进行调用
          * - 操作符：->
@@ -87,21 +95,21 @@ public class MyTest {
     //endregion
 
     //region 测试方法式接口
-    public Integer operation(Integer a, Integer b, MyInterface myFun){
+    public Integer operation(Integer a, Integer b, MyInterface myFun) {
         return myFun.count(a, b);
     }
 
     @Test
-    public void testFunctionInterface(){
+    public void testFunctionInterface() {
         MyInterface myFun1 = (a, b) -> a + b;
         MyInterface myFun2 = (a, b) -> a - b;
         MyInterface myFun3 = (a, b) -> a * b;
         MyInterface myFun4 = (a, b) -> a / b;
 
-        System.out.println(myFun1.count(1,2));
-        System.out.println(myFun2.count(1,2));
-        System.out.println(myFun3.count(1,2));
-        System.out.println(myFun4.count(1,2));
+        System.out.println(myFun1.count(1, 2));
+        System.out.println(myFun2.count(1, 2));
+        System.out.println(myFun3.count(1, 2));
+        System.out.println(myFun4.count(1, 2));
         Integer result = operation(1, 2, (x, y) -> x + y);
         System.out.println(result);
     }
@@ -109,7 +117,7 @@ public class MyTest {
 
     //region 测试java8方法引用
     @Test
-    public void testReference(){
+    public void testReference() {
         /**
          * 若 Lambda 表达式体中的内容已有方法实现，则我们可以使用“方法引用”
          * 对象 :: 实例方法
@@ -140,7 +148,7 @@ public class MyTest {
 
     //region 流相关操作
     @Test
-    public void testStream(){
+    public void testStream() {
         /**
          * 流 <p>stream</p> 是一个数据渠道，用于操作数据源（集合、数组等）所生成的元素序列
          * 也就是传入数据并在流中进行一系列操作最后返回处理后的值
@@ -184,7 +192,7 @@ public class MyTest {
 
         //无限流
         //迭代
-        Stream<Integer> stream4 = Stream.iterate(0, (i) -> ++i+i++);
+        Stream<Integer> stream4 = Stream.iterate(0, (i) -> ++i + i++);
         stream4.forEach(System.out::println);
 
         //生成
@@ -218,7 +226,7 @@ public class MyTest {
 
     //region java8的forEach操作
     @Test
-    public void testForEach(){
+    public void testForEach() {
         /**
          * forEach() 方法用于遍历动态数组中每一个元素并执行特定操作。
          * forEach() 方法的语法为：
@@ -249,7 +257,7 @@ public class MyTest {
     //endregion
 
     //region 测试java8的流中map方法
-    public Stream<Character> filterCharacter(String str){
+    public Stream<Character> filterCharacter(String str) {
         List<Character> list = new ArrayList<>();
         for (char c : str.toCharArray()) {
             list.add(c);
@@ -259,7 +267,7 @@ public class MyTest {
     }
 
     @Test
-    public void testMapper(){
+    public void testMapper() {
         /**
          * map：接收 Lambda ，将元素转换为其他形式或提取信息；接受一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素
          * flatMap：接收一个函数作为参数，将流中每一个值都换成另一个流，然后把所有流重新连接成一个流
@@ -289,12 +297,12 @@ public class MyTest {
 
     //region 测试java8排序算法
     @Test
-    public void testSort(){
+    public void testSort() {
         /**
          * sorted()：自然排序，从小到大
          * sorted(Comparator c)：定制排序
          */
-        List<Integer> list = Arrays.asList(9,7,10,4,5);
+        List<Integer> list = Arrays.asList(9, 7, 10, 4, 5);
         list.stream()
                 .sorted() //compareTo()
                 .forEach(System.out::println);
@@ -307,7 +315,7 @@ public class MyTest {
         );
         emps.stream()
                 .sorted((e1, e2) -> { //compare()
-                    if (e1.getSize().equals(e2.getSize())){
+                    if (e1.getSize().equals(e2.getSize())) {
                         return e1.getName().compareTo(e2.getName());
                     } else {
                         return e1.getSize().compareTo(e2.getSize());
@@ -321,8 +329,9 @@ public class MyTest {
     public enum Status {
         FREE, BUSY, VOCATION;
     }
+
     @Test
-    public void testMatch(){
+    public void testMatch() {
         /**
          * 终止操作：
          *
@@ -375,7 +384,7 @@ public class MyTest {
 
     //region 测试java8流以及lambada
     @Test
-    public void testCollect(){
+    public void testCollect() {
         /**
          * 归约：reduce(T identity, BinaryOperator) / reduce(BinaryOperator) 可以将流中的数据反复结合起来，得到一个值
          * 收集：collect 将流转换成其他形式；接收一个 Collector 接口的实现，用于给流中元素做汇总的方法
@@ -482,7 +491,7 @@ public class MyTest {
 
     //region 测试java流stream
     @Test
-    public void testCase(){
+    public void testCase() {
         /**
          * *案例一：**给定一个数字列表，如何返回一个由每个数的平方构成的列表呢？
          * (如：给定【1，2，3，4，5】，返回【1，4，9，16，25】)
@@ -510,7 +519,7 @@ public class MyTest {
 
     //region 测试java8的Optional类
     @Test
-    public void testOptional(){
+    public void testOptional() {
         /**
          * **定义：**Optional 类 (java.util.Optional) 是一个容器类，代表一个值存在或不存在，
          * 原来用 null 表示一个值不存在，现在用 Optional 可以更好的表达这个概念；并且可以避免空指针异常
@@ -541,7 +550,7 @@ public class MyTest {
 
     //region 时间操作相关工具
     @Test
-    public void testDate(){
+    public void testDate() {
         /**
          * Instant：以 Unix 元年 1970-01-01 00:00:00 到某个时间之间的毫秒值
          */
@@ -579,10 +588,20 @@ public class MyTest {
         Period period = Period.between(ld1, ld2);  // ISO 标准
         System.out.println(period.getYears());
         System.out.println(period.toTotalMonths());
+
+        System.out.println();
+        //获取下一天0点
+        LocalDateTime time = LocalDateTime.now().plusDays(1);
+        int day = time.getDayOfMonth();
+        int value = time.getMonthValue();
+        int year = time.getYear();
+        long l = LocalDate.of(year, value, day).atTime(0, 0, 0).toEpochSecond(ZoneOffset.ofHours(8));
+        System.out.println((l - LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(8))) / 60 / 60);
+        System.out.println(LocalDate.of(year, value, day).atTime(0, 0, 0).isAfter(LocalDateTime.now()));
     }
 
     @Test
-    public void testTemporalAdjuster(){
+    public void testTemporalAdjuster() {
         /**
          * TemporalAdjuster:时间矫正器，有时我们可能需要获取例如将日期调整到“下周日”等操作 是接口
          * TemporalAdjusters:该类通过实现静态方法提供了大量的常用TemporalAdjuster的实现 是实现类
@@ -619,7 +638,7 @@ public class MyTest {
     }
 
     @Test
-    public void testDateFormatter(){
+    public void testDateFormatter() {
         //默认格式化
         DateTimeFormatter dtf1 = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime ldt1 = LocalDateTime.now();
@@ -652,6 +671,7 @@ public class MyTest {
         }
     }
     //endregion
+
     /**
      * Check whether the given {@code CharSequence} contains actual <em>text</em>.
      * <p>More specifically, this method returns {@code true} if the
@@ -665,19 +685,20 @@ public class MyTest {
      * StringUtils.hasText(" 12345 ") = true
      * </pre>
      * the {@code CharSequence} to check (may be {@code null})
+     *
      * @return {@code true} if the {@code CharSequence} is not {@code null},
      * its length is greater than 0, and it does not contain whitespace only
      * @see Character#isWhitespace
      */
     @Test
     @OptDate
-    public void testAnno(){
+    public void testAnno() {
     }
 
 
     //region 测试String工具类
     @Test
-    public void testString(){
+    public void testString() {
         /**
          *  String类是不可变类，即一旦一个String对象被创建以后，
          * 包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。
@@ -713,9 +734,9 @@ public class MyTest {
     //endregion
 
     @Test
-    public void test3(){
+    public void test3() {
         MyInterface test = new testAbstract.test();
-        System.out.println(test.count(1,3));
+        System.out.println(test.count(1, 3));
         List<String> list = new ArrayList<>();
         String s = "abc";
         System.out.println(s.substring(0, 2));
@@ -724,13 +745,13 @@ public class MyTest {
 
     @Test
     public void rotate() {
-        int[] nums= {1, 2, 3, 4, 5, 6, 7};
-        int k=3;
-        int i=0;
-        if(k==nums.length){
+        int[] nums = {1, 2, 3, 4, 5, 6, 7};
+        int k = 3;
+        int i = 0;
+        if (k == nums.length) {
             System.out.println(Arrays.toString(nums));
         }
-        if (k>nums.length){
+        if (k > nums.length) {
             if (k % nums.length != 0) {
                 while (i < k) {
                     System.arraycopy(nums, 0, nums, 1, nums.length - 1);
@@ -740,7 +761,7 @@ public class MyTest {
             }
             System.out.println(Arrays.toString(nums));
         }
-        String s="We are happy.";
+        String s = "We are happy.";
         String replace = s.replace(" ", "%20");
         System.out.println(replace);
         ArrayList<Integer> list = new ArrayList<>();
@@ -748,26 +769,29 @@ public class MyTest {
         ListNode pre = null;
         ListNode cur = node;
         ListNode next = null;
-        while (cur!=null){
-            next=cur.next;
+        while (cur != null) {
+            next = cur.next;
             cur.setNext(pre);
-            pre=cur;
+            pre = cur;
             list.add(pre.val);
-            cur=next;
+            cur = next;
         }
         int[] ints = {list.size()};
         for (int j = 0; j < list.size(); j++) {
-            ints[j]=list.get(j);
+            ints[j] = list.get(j);
         }
         System.out.println(Arrays.toString(ints));
     }
-    static class ListNode{
+
+    static class ListNode {
         int val;
         ListNode next;
-        ListNode(int val){
-            this.val=val;
+
+        ListNode(int val) {
+            this.val = val;
         }
-        ListNode(){
+
+        ListNode() {
 
         }
 
@@ -786,5 +810,12 @@ public class MyTest {
         public void setNext(ListNode next) {
             this.next = next;
         }
+    }
+
+    @Test
+    public void redisTest() {
+//        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.opsForValue().set("test", "test");
+        
     }
 }

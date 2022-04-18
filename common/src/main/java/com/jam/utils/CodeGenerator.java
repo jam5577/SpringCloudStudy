@@ -42,7 +42,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
 //        String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("D:\\WebProject\\SpringCloudStudy\\blog" + "/src/main/java");
+        gc.setOutputDir("D:\\WebProject\\wallbreaker-background\\src\\main\\java\\cn\\edu\\tongji\\wallbreaker\\app\\people");
         gc.setAuthor("jam");
         gc.setOpen(false);
         gc.setSwagger2(true); //实体属性 Swagger2 注解
@@ -53,18 +53,22 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/sys_blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true");
+//        dsc.setUrl("jdbc:mysql://localhost:3306/sys_blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true");
+        dsc.setUrl("jdbc:mysql://rm-uf6a7u376r66h29m7.mysql.rds.aliyuncs.com:3306/wall_breaker_pro?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai");
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("041700");
+//        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setDriverName("com.alibaba.druid.pool.DruidDataSource");
+//        dsc.setUsername("root");
+        dsc.setUsername("wallbreaker2021");
+//        dsc.setPassword("041700");
+        dsc.setPassword("5oiR5rC46L+c5Zac5qyi5bCP57Gz");
         dsc.setDbType(DbType.MYSQL);
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
 //        pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.jam.app");
+        pc.setParent("cn.edu.tongji.wallbreaker.app.people");
         mpg.setPackageInfo(pc);
 
         // 策略配置
@@ -80,7 +84,7 @@ public class CodeGenerator {
         strategy.setSuperEntityColumns("id");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "sys_");
+//        strategy.setTablePrefix(pc.getModuleName() + "sys_");
         mpg.setStrategy(strategy);
         mpg.execute();
     }

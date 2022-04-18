@@ -11,6 +11,7 @@
     <modules>
         <module>java8</module>
         <module>common</module>
+        <module>elasticsearch</module>
         <module>excel-operation</module>
         <module>collectionhub</module>
         <module>jsoup</module>
@@ -41,6 +42,9 @@
         <druid.version>1.2.8</druid.version>
         <jsoup.version>1.10.2</jsoup.version>
         <hutool.version>5.7.20</hutool.version>
+        <es.version>7.17.1</es.version>
+        <redis.version>2.6.0</redis.version>
+        <wechat.version>4.0.0</wechat.version>
     </properties>
 
     <!--统一依赖管理-->
@@ -63,6 +67,11 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -133,6 +142,16 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${es.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${wechat.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
