@@ -1,0 +1,18 @@
+package com.jam.app.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jam.app.entity.UserInfo;
+import org.springframework.stereotype.Repository;
+
+/**
+ * <p>
+ * Mapper 接口
+ * </p>
+ *
+ * @author jam
+ * @since 2022-02-10
+ */
+@Repository
+public interface UserInfoMapper extends BaseMapper<UserInfo> {
+
+}

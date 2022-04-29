@@ -4,7 +4,6 @@ import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -63,7 +62,7 @@ public class SwaggerConfig {
                 //any()扫描全部
                 //none()不扫描
                 //withClassAnnotation传入注解的类扫描方法上的注解
-                .apis(RequestHandlerSelectors.any())
+//                .apis(RequestHandlerSelectors.any())
                 //paths过滤路径，传入PathSelectors
                 //ant()定义过滤的路径,该路径是url路径
                 //regex()定义正则表达过滤

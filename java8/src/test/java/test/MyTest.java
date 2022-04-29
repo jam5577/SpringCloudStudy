@@ -1,7 +1,6 @@
 package test;
 
 import anno.MyAnnotation;
-import com.jam.anno.OptDate;
 import dao.MyInterface;
 import entity.Employee;
 import org.junit.Test;
@@ -691,7 +690,6 @@ public class MyTest {
      * @see Character#isWhitespace
      */
     @Test
-    @OptDate
     public void testAnno() {
     }
 
@@ -816,6 +814,6 @@ public class MyTest {
     public void redisTest() {
 //        redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.opsForValue().set("test", "test");
-        
+
     }
 }

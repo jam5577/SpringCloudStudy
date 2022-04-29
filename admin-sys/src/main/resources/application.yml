@@ -12,3 +12,7 @@ mybatis-plus:
 
 server:
   port: 9000
+
+knife4j:
+  enable: true
+  cors: true

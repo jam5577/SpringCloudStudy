@@ -1,8 +1,8 @@
 package com.jam.utils;
 
+import com.jam.app.entity.Content;
 import com.jam.downloader.downbit.DownloadMain;
 import com.jam.downloader.downbit.util.ThunderUtils;
-import com.jam.entity.Content;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -1,19 +1,15 @@
 package com.jam;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin
-@EnableGlobalMethodSecurity(securedEnabled = true)
 @SpringBootApplication
-@MapperScan("com.jam.mapper")
+@EnableKnife4j
+@MapperScan("com.jam.app.mapper")
 public class AdminSysApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(AdminSysApplication.class, args);
     }
-
 }

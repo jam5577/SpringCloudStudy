@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create: 2022-02-10 22:38
  **/
 @SpringBootApplication
-@MapperScan("com.jam.mapper")
+@MapperScan("com.jam.app.mapper")
 public class ExcelApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ExcelApplication.class,args);
+        SpringApplication.run(ExcelApplication.class, args);
     }
 }

@@ -1,7 +1,7 @@
 package com.jam.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -21,13 +21,7 @@ public class JSONUtils {
      * @throws JsonProcessingException
      */
     public static String toJSON(Object o) {
-        try {
-            log.info("正常返回JSON数据");
-            return new ObjectMapper().writeValueAsString(o);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            log.error("抛出异常，{}", String.valueOf(e));
-        }
-        return null;
+        log.info("正常返回JSON数据");
+        return JSON.toJSONString(o);
     }
 }
