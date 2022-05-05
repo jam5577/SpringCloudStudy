@@ -923,6 +923,32 @@ public class LeetCode {
         }
     }
 
+    public static String leet14(String[] strs) {
+        if (strs != null) {
+            for (String str : strs) {
+                if (str == null || str.length() == 0) {
+                    return "";
+                }
+            }
+        } else {
+            return "";
+        }
+        Arrays.sort(strs);
+        int length = strs.length;
+        int n = strs[0].length();
+        int m = strs[length - 1].length();
+        int num = Math.min(n, m);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < num; i++) {
+            if (strs[0].charAt(i) == strs[length - 1].charAt(i)) {
+                builder.append(strs[0].charAt(i));
+            } else {
+                break;
+            }
+        }
+        return builder.toString();
+    }
+
 
     public static void main(String[] args) throws IOException {
 //        leet3();

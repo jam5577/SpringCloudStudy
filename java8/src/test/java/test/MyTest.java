@@ -811,9 +811,12 @@ public class MyTest {
     }
 
     @Test
-    public void redisTest() {
-//        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.opsForValue().set("test", "test");
-
+    public void test1() throws InterruptedException {
+        HashSet<String> set = new HashSet<>();
+        for (int i = 0; i < 11; i++) {
+            System.out.print(i);
+        }
     }
+
+
 }
