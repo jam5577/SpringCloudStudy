@@ -25,23 +25,23 @@ import java.util.ArrayList;
 @EnableKnife4j
 @EnableSwagger2
 public class SwaggerConfig {
-    private static final String title = "admin-sys系统swagger2接口文档";
+    private static final String TITLE = "admin-sys系统swagger2接口文档";
 
-    private static final String description = "是基于毕设系统的升级款";
+    private static final String DESCRIPTION = "是基于毕设系统的升级款";
 
-    private static final String version = "v1.0";
+    private static final String VERSION = "v1.0";
 
-    private static final String serviceUrl = "www.bilibili.com";
+    private static final String SERVICE_URL = "www.bilibili.com";
 
-    private static final String license = "no license";
+    private static final String LICENSE = "no license";
 
-    private static final String licenseUrl = "www.bilibili.com";
+    private static final String LICENSE_URL = "www.bilibili.com";
 
-    private static final String name = "jam";
+    private static final String NAME = "jam";
 
-    private static final String url = "www.bilibili.com";
+    private static final String URL = "www.bilibili.com";
 
-    private static final String email = "806420570@qq.com";
+    private static final String EMAIL = "806420570@qq.com";
 
     //定义Docket的Bean，使用Docket完成配置
     //enable定义swagger是否开启
@@ -74,15 +74,15 @@ public class SwaggerConfig {
 
     public ApiInfo apiInfo() {
         //作者信息
-        Contact DEFAULT_CONTACT = new Contact(name, url, email);
+        Contact DEFAULT_CONTACT = new Contact(NAME, URL, EMAIL);
         return new ApiInfo(
-                title,
-                description,
-                version,
-                serviceUrl,
+                TITLE,
+                DESCRIPTION,
+                VERSION,
+                SERVICE_URL,
                 DEFAULT_CONTACT,
-                license,
-                licenseUrl,
+                LICENSE,
+                LICENSE_URL,
                 new ArrayList<>());
     }
 }

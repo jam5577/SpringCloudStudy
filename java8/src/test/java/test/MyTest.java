@@ -14,6 +14,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -816,6 +817,7 @@ public class MyTest {
         for (int i = 0; i < 11; i++) {
             System.out.print(i);
         }
+        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
     }
 
 

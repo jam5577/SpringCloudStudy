@@ -12,32 +12,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 映射静态资源
+ *
+ * @author Jam
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * 配置静态资源
      */
-//    @Override
-//    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-//        registry.addResourceHandler("swagger-ui.html")
-//                .addResourceLocations("classpath:/META-INF/resources/");
-//        registry.addResourceHandler("/webjars/**")
-//                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-//        super.addResourceHandlers(registry);
-//    }
-//
-//    @Override
-//    public void addCorsMappings(CorsRegistry corsRegistry) {
-//        /*所有请求都允许跨域，使用这种配置就不需要在interceptor中配置header了*/
-//        corsRegistry.addMapping("/**")
-//                .allowCredentials(false)
-////                .allowedOrigins("http://localhost:9528", "true")
-//                .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
-//                .allowedHeaders("*")
-//                .maxAge(3600);
-//    }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");

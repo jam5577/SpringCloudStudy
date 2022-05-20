@@ -17,6 +17,7 @@
         <module>jsoup</module>
         <module>cplex</module>
         <module>blog</module>
+        <module>seckill</module>
     </modules>
 
     <!--统一版本管理-->
