@@ -1,6 +1,6 @@
 package com.jam;
 
-import com.jam.mapper.UserMapper;
+import com.jam.app.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,5 +19,6 @@ class AdminSysApplicationTests {
 //                .set(User::getUpdateTime, new Date()));
 //        System.out.println(update);
     }
+
 
 }

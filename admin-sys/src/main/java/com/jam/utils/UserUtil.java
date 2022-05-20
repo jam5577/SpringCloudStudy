@@ -1,8 +1,7 @@
 package com.jam.utils;
 
-import com.jam.dto.UserDTO;
-import com.jam.entity.User;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.jam.app.dto.UserDTO;
+import com.jam.app.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -18,7 +17,7 @@ public class UserUtil {
     /**
      * 封装用户信息并返回
      */
-    public static UserDTO conventLoginUser(User user, List<String> roleList, HttpServletRequest request){
+    public static UserDTO conventLoginUser(User user, List<String> roleList, HttpServletRequest request) {
         String ipAddr = IpUtil.getIpAddr(request);
         String ipSource = IpUtil.getIpSource(ipAddr);
         return UserDTO.builder()
@@ -60,9 +59,9 @@ public class UserUtil {
     /**
      * 获取用户信息并返回
      */
-    public static UserDTO getUserInfoDTO(){
-        return (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
+//    public static UserDTO getUserInfoDTO(){
+//        return (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    }
 
 //    public UserInfoDTO getUserInfo(){
 //        UserInfoDTO principal = (UserInfoDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

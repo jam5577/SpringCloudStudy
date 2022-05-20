@@ -6,6 +6,14 @@
 /collectionhub/target/
 /.idea/
 /SpringCloudStudy.iml/
+/blog/target/
+/blog/blog.iml/
+/God-Of-BigData-master/
+/bigdata-notes/
+/lib/
+/SZT-bigdata-master/
+/advanced-java-main/
+/JavaFamily-master/
 #java
 *.class
 
@@ -41,3 +49,4 @@ build/
 # system ignore
 .DS_Store
 Thumbs.db
+.gitignore

@@ -1,0 +1,57 @@
+<?xml version = "1.0"?>
+<!--name 项目名；default(required)默认运行项目；basedir 项目基准目录；description 项目描述-->
+<project name="LeetCode Project" default="run" basedir=".">
+    <property name="src" value="."/>
+    <property name="dest" value="classes"/>
+    <property name="hello_jar" value="hello1.jar"/>
+    <!--一个项目下有多个target，一个target可以依赖其他target    -->
+    <!--name(required) 与default相同；depends 依赖的目标；if 设置属性时才执行
+        unless 属性没有设置时才执行；description 描述-->
+    <!-- 程序中的名为run的target的depends属性compile，而名为compile的target的depends属性是prepare，
+    所以这几个target执行的顺序是prepare->compile->run  -->
+    <target name="leet">
+        <!--<mkdir>标签 该标签用于创建一个目录，它有一个属性dir用来指定所创建的目录名，
+            其代码如下：<mkdir dir=”＄{class.root}”/>通过以上代码就创建了一个目录，
+            这个目录已经被前面的property标签所指定。-->
+        <!-- <javac>标签
+            该标签用于编译一个或一组java文件，其属性如下:
+                (1).srcdir表示源程序的目录。
+                (2).destdir表示class文件的输出目录。
+                (3).include表示被编译的文件的模式。
+                (4).excludes表示被排除的文件的模式。
+                (5).classpath表示所使用的类路径。
+                (6).debug表示包含的调试信息。
+                (7).optimize表示是否使用优化。
+                (8).verbose 表示提供详细的输出信息。
+                (9).fileonerror表示当碰到错误就自动停止。 -->
+        <echo>Hello World - Welcome to Apache Ant!</echo>
+        <!--<java>标签
+            该标签用来执行编译生成的.class文件，其属性如下。
+                (1).classname 表示将执行的类名。
+                (2).jar表示包含该类的JAR文件名。
+                (3).classpath所表示用到的类路径。
+                (4).fork表示在一个新的虚拟机中运行该类。
+                (5).failonerror表示当出现错误时自动停止。
+                (6).output 表示输出文件。
+                (7).append表示追加或者覆盖默认文件。-->
+        <java fork="true" failonerror="yes" classname="LeetCode">
+            <arg line="admin@test.com"/>
+        </java>
+    </target>
+    <target name="init">
+        <mkdir dir="${dest}"/>
+    </target>
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${dest}"/>
+    </target>
+    <target name="build" depends="compile">
+        <jar jarfile="${hello_jar}" basedir="${dest}"/>
+    </target>
+    <target name="run" depends="build">
+        <java classname="com.jam.java.leet.LeetCode" classpath="${hello_jar}"/>
+    </target>
+    <target name="clean">
+        <delete dir="${dest}"/>
+        <delete file="${hello_jar}"/>
+    </target>
+</project>

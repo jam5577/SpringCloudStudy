@@ -1,9 +1,7 @@
 package com.jam;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @program: SpringCloudStudy
@@ -13,11 +11,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  **/
 
 @SpringBootApplication
-@MapperScan("com.jam.mapper")
-@EnableSwagger2
-//@EnableKnife4j
 public class JamApplication {
     public static void main(String[] args) {
-        SpringApplication.run(JamApplication.class,args);
+        SpringApplication.run(JamApplication.class, args);
     }
 }

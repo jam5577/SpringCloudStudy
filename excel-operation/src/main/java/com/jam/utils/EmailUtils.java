@@ -1,6 +1,6 @@
 package com.jam.utils;
 
-import com.jam.entity.MailSender;
+import com.jam.app.entity.MailSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,15 +16,16 @@ import java.io.File;
 
 @Slf4j
 @Component
-public class EmailUtils{
+public class EmailUtils {
 
     private final JavaMailSender javaMailSender;
+
     @Autowired
-    public EmailUtils(JavaMailSender javaMailSender){
-        this.javaMailSender =javaMailSender;
+    public EmailUtils(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
     }
-	
-	//注入配置文件中配置的信息——>from
+
+    //注入配置文件中配置的信息——>from
     @Value("${spring.mail.from}")
     private static String from;
 
@@ -60,15 +61,15 @@ public class EmailUtils{
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
-            messageHelper = new MimeMessageHelper(message,true);
+            messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setFrom(from);
             messageHelper.setTo(to);
             message.setSubject(subject);
-            messageHelper.setText(content,true);
+            messageHelper.setText(content, true);
             javaMailSender.send(message);
             log.info("邮件已经发送！");
         } catch (MessagingException e) {
-            log.error("发送邮件时发生异常："+e);
+            log.error("发送邮件时发生异常：" + e);
         }
     }
 
@@ -76,15 +77,15 @@ public class EmailUtils{
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
-            messageHelper = new MimeMessageHelper(message,true);
+            messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setFrom(from);
             messageHelper.setTo(mailSender.getTo());
             message.setSubject(mailSender.getSubject());
-            messageHelper.setText(mailSender.getContent(),true);
+            messageHelper.setText(mailSender.getContent(), true);
             javaMailSender.send(message);
             log.info("邮件已经发送！");
         } catch (MessagingException e) {
-            log.error("发送邮件时发生异常："+e);
+            log.error("发送邮件时发生异常：" + e);
         }
     }
 
@@ -92,20 +93,20 @@ public class EmailUtils{
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
-            messageHelper = new MimeMessageHelper(message,true);
+            messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setFrom(from);
             messageHelper.setTo(to);
             messageHelper.setSubject(subject);
-            messageHelper.setText(content,true);
+            messageHelper.setText(content, true);
             //携带附件
             FileSystemResource file = new FileSystemResource(filePath);
             String fileName = filePath.substring(filePath.lastIndexOf(File.separator));
-            messageHelper.addAttachment(fileName,file);
+            messageHelper.addAttachment(fileName, file);
 
             javaMailSender.send(message);
             log.info("邮件加附件发送成功！");
         } catch (MessagingException e) {
-            log.error("发送失败："+e);
+            log.error("发送失败：" + e);
         }
     }
 
@@ -113,20 +114,20 @@ public class EmailUtils{
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
-            messageHelper = new MimeMessageHelper(message,true);
+            messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setFrom(from);
             messageHelper.setTo(mailSender.getTo());
             messageHelper.setSubject(mailSender.getSubject());
-            messageHelper.setText(mailSender.getContent(),true);
+            messageHelper.setText(mailSender.getContent(), true);
             //携带附件
             FileSystemResource file = new FileSystemResource(filePath);
             String fileName = filePath.substring(filePath.lastIndexOf(File.separator));
-            messageHelper.addAttachment(fileName,file);
+            messageHelper.addAttachment(fileName, file);
 
             javaMailSender.send(message);
             log.info("邮件加附件发送成功！");
         } catch (MessagingException e) {
-            log.error("发送失败："+e);
+            log.error("发送失败：" + e);
         }
     }
 
