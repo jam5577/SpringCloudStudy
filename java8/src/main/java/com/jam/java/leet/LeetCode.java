@@ -1,7 +1,5 @@
 package com.jam.java.leet;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -11,7 +9,7 @@ import java.util.*;
  * @create: 2022-04-08 16:24
  **/
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public final class LeetCode {
 
     /**
@@ -111,8 +109,7 @@ public final class LeetCode {
         System.out.println(max);
     }
 
-    public static void leet9() {
-        int x = -121;
+    public static void leet9(int x) {
         if (x < 0) {
             return;
         }
@@ -149,25 +146,6 @@ public final class LeetCode {
         System.out.println(j);
     }
 
-    public static void leet14() {
-        String[] s = {"flower", "flow", "flight"};
-        Character first = s[0].charAt(0);
-        //如果三个单词首字母有两个不相同则返回空
-        for (String value : s) {
-            char c = value.charAt(0);
-            if (first.equals(c)) {
-                first = c;
-            } else {
-                return;
-            }
-        }
-        StringBuilder builder = new StringBuilder();
-        //对n个单词进行依次对比，直到有任意两个单词的同一位置的字母不相同，或是某个单词的字母遍历完
-        for (String value : s) {
-
-        }
-    }
-
     public static void leet69() {
         int a = 8;
         double pow = Math.pow(a, 0.5);
@@ -177,12 +155,6 @@ public final class LeetCode {
             x = (x + a / x) / 2;
         }
         System.out.println(x);
-    }
-
-    public static void leet25(ListNode head, int k) {
-
-        //链表反转
-        head = head.next;
     }
 
     public static void leet148(ListNode head) {
@@ -196,34 +168,6 @@ public final class LeetCode {
         if (left > right) {
             head.val = right;
             head.next.val = left;
-        }
-    }
-
-    public static void byteD() {
-        int key = 0;
-        int max = 0;
-        HashMap<Integer, Integer> map1 = new HashMap<>();
-        Set<Integer> keySet = map1.keySet();
-        for (Integer x : keySet) {
-            key = x.compareTo(key) > 0 ? x : key;
-            if (map1.containsKey(key)) {
-                max = map1.get(key);
-            }
-        }
-    }
-
-    public static void removeEmptyFile() {
-        final String path = "E:\\迅雷下载\\Elles";
-        File file = new File(path);
-        File[] files = file.listFiles();
-        for (File f : files) {
-            if (Objects.requireNonNull(f.list()).length == 0) {
-                if (f.delete()) {
-                    System.out.println(f.getName() + "文件已删除");
-                }
-            } else {
-                System.out.println(f.getName() + "文件不为空");
-            }
         }
     }
 
@@ -577,17 +521,6 @@ public final class LeetCode {
         return address.replace(".", "[.]");
     }
 
-    public static int leet1725(int[][] rectangles) {
-        int res = 0;
-        int maxLen = Math.min(rectangles[0][0], rectangles[0][1]);
-        for (int[] rectangle : rectangles) {
-            int k = Math.min(rectangle[0], rectangle[1]);
-            if (maxLen < k) {
-                res += maxLen == k ? 1 : 0;
-            }
-        }
-        return res;
-    }
 
     public static int leet1281(int n) {
         int left = 1;
@@ -600,17 +533,6 @@ public final class LeetCode {
             right += temp;
         }
         return left - right;
-    }
-
-    public static int[] leet1313(int[] nums) {
-        int length = 0;
-        for (int i = 0; i < nums.length; i += 2) {
-            length += nums[i];
-        }
-        int[] numbers = new int[length];
-        for (int i = 0; i < numbers.length; i++) {
-        }
-        return numbers;
     }
 
     public static String leet1678(String command) {
@@ -656,7 +578,7 @@ public final class LeetCode {
 
         public int ping(int t) {
             requests.add(t);
-            return (int) requests.stream().sorted().filter((x) -> x >= t - 3000 && x <= t).count();
+            return (int) requests.stream().filter((x) -> x >= t - 3000 && x <= t).count();
         }
 
         public List<Integer> offer042(List<Integer> list) {
@@ -942,43 +864,6 @@ public final class LeetCode {
         return ans;
     }
 
-    public static int leet2202(int[] nums, int k) {
-        //如果长度为1，只进行1次操作，返回-1
-        //如果长度 >= k，则先执行k-1次删除操作，最后一次选择已删除的最大值加入，并返回，也就是选择除最后一个元素之前最大的数字返回
-        //如果长度 < k：
-        //            k - 长度 + 1 如果为偶数，则可以直接返回数组最大值
-        //            k - 长度 + 1 如果为1，则就是k=长度的情况，如果为>1的奇数，则返回最大值
-        if (nums.length <= 1) {
-            return -1;
-        }
-        if (k == 0) {
-            return nums[0];
-        }
-        int max = 0;
-        int max1 = 0;
-        for (int num : nums) {
-            if (max < num) {
-                max = num;
-            }
-        }
-        for (int i = 0; i < k - 1; i++) {
-            if (max1 < nums[i]) {
-                max1 = nums[i];
-            }
-        }
-        if (nums.length > k) {
-            return Math.max(max1, nums[k]);
-        } else if (nums.length == k) {
-            return max1;
-        } else if (nums.length < k && (k - nums.length + 1 % 2) == 0) {
-            return max;
-        } else if ((k - nums.length + 1) == 1) {
-            return max1;
-        } else {
-            return max;
-        }
-    }
-
     public static String leet14(String[] strs) {
         if (strs != null) {
             for (String str : strs) {
@@ -1007,11 +892,10 @@ public final class LeetCode {
 
     public static TreeNode leet226(TreeNode root) {
         if (root == null) {
-            return root;
+            return null;
         }
         TreeNode left = leet226(root.left);
-        TreeNode right = leet226(root.right);
-        root.left = right;
+        root.left = leet226(root.right);
         root.right = left;
         return root;
     }
@@ -1101,15 +985,15 @@ public final class LeetCode {
      */
     public interface NestedInteger {
         // @return true if this NestedInteger holds a single integer, rather than a nested list.
-        public boolean isInteger();
+        boolean isInteger();
 
         // @return the single integer that this NestedInteger holds, if it holds a single integer
         // Return null if this NestedInteger holds a nested list
-        public Integer getInteger();
+        Integer getInteger();
 
         // @return the nested list that this NestedInteger holds, if it holds a nested list
         // Return empty list if this NestedInteger holds a single integer
-        public List<NestedInteger> getList();
+        List<NestedInteger> getList();
     }
 
     /**
@@ -1180,6 +1064,7 @@ public final class LeetCode {
         traverse(root.right);
     }
 
+    @SuppressWarnings("all")
     public static boolean leet234(ListNode head) {
         ListNode slow = head, fast = head;
         while (fast != null && fast.next != null) {
@@ -1241,7 +1126,7 @@ public final class LeetCode {
 
     public static ListNode leet23(ListNode[] lists) {
         ListNode dummy = new ListNode(-1), p = dummy;
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, (a, b) -> a.val - b.val);
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, Comparator.comparingInt(a -> a.val));
         for (ListNode head : lists) {
             if (head != null) {
                 pq.add(head);
@@ -1275,19 +1160,6 @@ public final class LeetCode {
             slow = slow.next;
         }
         return slow;
-    }
-
-    public static List<Integer> leet448(int[] nums) {
-        int n = nums.length;
-        int[] array = Arrays.stream(nums).sorted().distinct().toArray();
-        List<Integer> list = new ArrayList<>();
-        for (int i = 1; i < n + 1; i++) {
-            if (array[i - 1] != i) {
-                list.add(i);
-            }
-            i++;
-        }
-        return list;
     }
 
     public static ListNode leet206(ListNode head) {
@@ -1325,12 +1197,12 @@ public final class LeetCode {
 
     public static List<List<Integer>> leet15(int[] nums) {
         if (nums == null || nums.length < 3) {
-            return new ArrayList<List<Integer>>();
+            return new ArrayList<>();
         }
         Arrays.sort(nums);
         int n = nums.length;
         int left = 0, right = n - 1;
-        int a = 0, b = 0, c = 0;
+        int a, b, c;
         List<Integer> list = new ArrayList<>();
         List<List<Integer>> res = new ArrayList<>();
         while (left < right) {
@@ -1399,7 +1271,7 @@ public final class LeetCode {
         return slow;
     }
 
-    public static List<List<Integer>> linkedList = new LinkedList<List<Integer>>();
+    public static List<List<Integer>> linkedList = new LinkedList<>();
 
     public static List<List<Integer>> leet46(int[] nums) {
         boolean[] used = new boolean[nums.length];
@@ -1441,6 +1313,7 @@ public final class LeetCode {
                 //取出当前节点做判断
                 TreeNode node = q.poll();
                 //如果左右子树都为空则是叶子节点
+                assert node != null;
                 if (node.left == null && node.right == null) {
                     return depth;
                 }
@@ -1470,7 +1343,7 @@ public final class LeetCode {
         for (int[] row : matrix) {
             reverse(row);
         }
-        System.out.println(matrix.toString());
+        System.out.println(Arrays.deepToString(matrix));
     }
 
     public static void reverse(int[] row) {
@@ -1488,28 +1361,8 @@ public final class LeetCode {
         //对每一个元素都进行对比，然后取出最小值
         Arrays.sort(nums);
         int res = 0, n = nums.length, x = nums[n / 2];
-        for (int i = 0; i < n; i++) {
-            res += Math.abs(nums[i] - x);
-        }
-        return res;
-    }
-
-    public static int[] leet436(int[][] intervals) {
-        int n = intervals.length;
-        int[] res = new int[n];
-        //取出start
-        int[] start = new int[n];
-        for (int i = 0; i < n; i++) {
-            start[i] = intervals[i][0];
-        }
-        for (int i = 0; i < n; i++) {
-            int left = 0, right = n - 1;
-            while (left < right) {
-                int mid = (left + right + 1) / 2;
-                if (start[i] >= intervals[i][1]) {
-
-                }
-            }
+        for (int num : nums) {
+            res += Math.abs(num - x);
         }
         return res;
     }
@@ -1563,8 +1416,152 @@ public final class LeetCode {
         return root;
     }
 
+    public static boolean leet464(int maxChoosableInteger, int desiredTotal) {
+        return false;
+    }
 
-    public static void main(String[] args) throws IOException {
+    public static List<Integer> leet448(int[] nums) {
+        int n = nums.length;
+        for (int num : nums) {
+            int x = (num - 1) % n;
+            nums[x] += n;
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= n) {
+                list.add(i + 1);
+            }
+        }
+        return list;
+    }
+
+    public static boolean leet101(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return check(root.left, root.right);
+    }
+
+    static boolean check(TreeNode left, TreeNode right) {
+        if (left == null || right == null) {
+            return left == right;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return check(left.left, right.right) && check(left.right, right.left);
+    }
+
+    public static int leet53(int[] nums) {
+        int pre = 0, max = nums[0];
+        for (int num : nums) {
+            pre = Math.max(pre + num, num);
+            max = Math.max(pre, max);
+        }
+        return max;
+    }
+
+    public static int[] leet1313(int[] nums) {
+        int length = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            length += nums[i];
+        }
+        int[] res = new int[length];
+        int index = 0;
+        for (int i = 1; i < nums.length; i += 2) {
+            for (int j = 0; j < nums[i - 1]; j++) {
+                res[index++] = nums[i];
+            }
+        }
+        return res;
+    }
+
+    public static boolean leet965(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        val = root.val;
+        same(root);
+        return is;
+    }
+
+    static int val;
+    static boolean is = true;
+
+    public static void same(TreeNode root) {
+        if (root == null || !is) {
+            return;
+        }
+        if (root.val != val) {
+            is = false;
+            return;
+        }
+        same(root.left);
+        same(root.right);
+    }
+
+    public static int leet2278(String s, char letter) {
+        int len = 0;
+        for (char c : s.toCharArray()) {
+            len += c == letter ? 1 : 0;
+        }
+        return (int) Math.floor((1.0 * len / s.length()) * 100);
+    }
+
+    public static int leet2255(String[] words, String s) {
+        int res = 0;
+        for (String word : words) {
+            res += s.startsWith(word) ? 1 : 0;
+        }
+        return res;
+    }
+
+    public static int leet1450(int[] startTime, int[] endTime, int queryTime) {
+        int res = 0;
+        for (int i = 0; i < startTime.length; i++) {
+            res += (startTime[i] <= queryTime && endTime[i] >= queryTime) ? 1 : 0;
+        }
+        return res;
+    }
+
+    public static int LCP17(String s) {
+        int x = 1, y = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == "A".charAt(0)) {
+                x = 2 * x + y;
+            } else if (s.charAt(i) == "B".charAt(0)) {
+                y = 2 * y + x;
+            }
+        }
+        return x + y;
+    }
+
+    public static int LCP44(TreeNode root) {
+        traverse(root, set);
+        return set.size();
+    }
+
+    static Set<Integer> set = new HashSet<>();
+
+    static void traverse(TreeNode root, Set<Integer> set) {
+        if (root == null) {
+            return;
+        }
+        set.add(root.val);
+        traverse(root.left, set);
+        traverse(root.right, set);
+    }
+
+    public static int leet2185(String[] words, String pref) {
+        int res = 0;
+        for (String word : words) {
+            res += word.startsWith(pref) ? 1 : 0;
+        }
+        return res;
+    }
+
+
+    public static void main(String[] args) {
 //        leet3();
 //        leet69();
 //        removeEmptyFile();
@@ -1604,7 +1601,13 @@ public final class LeetCode {
 //        System.out.println(leet462(new int[]{1, 10, 2, 9}));
 //        System.out.println(leet961(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
 //        System.out.println(offer64(6));
-        System.out.println(interview1601(new int[]{1, 2})[0]);
-        System.out.println(interview1601(new int[]{1, 2})[1]);
+//        System.out.println(interview1601(new int[]{1, 2})[0]);
+//        System.out.println(interview1601(new int[]{1, 2})[1]);
+//        System.out.println((4 >> 2) & 1);
+//        System.out.println(4 | 6);
+//        System.out.println(~4);
+//        System.out.println(6 ^ 4);
+//        System.out.println(15 % 8);
+        System.out.println(leet53(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
     }
 }
