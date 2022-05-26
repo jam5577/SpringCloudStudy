@@ -12,10 +12,6 @@
         <module>java8</module>
         <module>common</module>
         <module>elasticsearch</module>
-        <module>excel-operation</module>
-        <module>collectionhub</module>
-        <module>jsoup</module>
-        <module>cplex</module>
         <module>blog</module>
         <module>seckill</module>
     </modules>
