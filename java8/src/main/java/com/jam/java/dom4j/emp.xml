@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+    <emp id="1">
+        <name>提利昂·兰尼斯特</name>
+        <age>25</age>
+        <gender>男</gender>
+        <salary>5000</salary>
+    </emp>
+    <emp id="2">
+        <name>卡丽熙</name>
+        <age>27</age>
+        <gender>女</gender>
+        <salary>6000</salary>
+    </emp>
+    <emp id="3">
+        <name>琼恩·雪诺</name>
+        <age>28</age>
+        <gender>男</gender>
+        <salary>7000</salary>
+    </emp>
+    <emp id="4">
+        <name>布兰·斯塔克</name>
+        <age>22</age>
+        <gender>男</gender>
+        <salary>8000</salary>
+    </emp>
+    <emp id="5">
+        <name>nightKing</name>
+        <age>26</age>
+        <gender>未知</gender>
+        <salary>9000</salary>
+    </emp>
+</list>

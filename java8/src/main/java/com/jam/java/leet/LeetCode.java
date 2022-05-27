@@ -1599,6 +1599,101 @@ public final class LeetCode {
         return -1;
     }
 
+    static class BinarySearch {
+        /**
+         * 普通二分查找
+         */
+        public static int ordinary(int[] nums, int target) {
+            int left = 0, right = nums.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] < target) {
+                    left = mid + 1;
+                } else if (nums[mid] > target) {
+                    right = mid - 1;
+                } else if (nums[mid] == target) {
+                    return mid;
+                }
+            }
+            return -1;
+        }
+
+        /**
+         * 二分查找左边界
+         */
+        public static int left(int[] nums, int target) {
+            int left = 0, right = nums.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] < target) {
+                    left = mid + 1;
+                } else if (nums[mid] > target) {
+                    right = mid - 1;
+                } else if (nums[mid] == target) {
+                    right = mid - 1;
+                }
+            }
+            if (left >= nums.length || nums[left] != target) {
+                return -1;
+            }
+            return left;
+        }
+
+        /**
+         * 二分查找右边界
+         */
+        public static int right(int[] nums, int target) {
+            int left = 0, right = nums.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] < target) {
+                    left = mid + 1;
+                } else if (nums[mid] > target) {
+                    right = mid - 1;
+                } else if (nums[mid] == target) {
+                    left = mid + 1;
+                }
+            }
+            if (right < 0 || nums[right] != target) {
+                return -1;
+            }
+            return right;
+        }
+    }
+
+    public static int leet35(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        ArrayList<Integer> list = new ArrayList<>();
+        list.trimToSize();
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else if (nums[mid] == target) {
+                return mid;
+            }
+        }
+        return left;
+    }
+
+    public static int interview1711(String[] words, String word1, String word2) {
+        int length = words.length, res = length;
+        int index1 = -1, index2 = -1;
+        for (int i = 0; i < length; i++) {
+            if (words[i].equals(word1)) {
+                index1 = i;
+            } else if (words[i].equals(word2)) {
+                index2 = i;
+            }
+            if (index1 >= 0 && index2 >= 0) {
+                res = Math.min(res, Math.abs(index1 - index2));
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 //        leet3();
 //        leet69();
@@ -1649,6 +1744,12 @@ public final class LeetCode {
 //        System.out.println(leet53(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
 //        System.out.println(Arrays.toString("abcdefghijklmnopqrstuvwxyz".split("d")));
 //        System.out.println("ab" + "a");
-        System.out.println(leet704(new int[]{-1, 0, 3, 5, 9, 12}, 2));
+//        System.out.println(leet704(new int[]{-1, 0, 3, 5, 9, 12}, 2));
+//        System.out.println(BinarySearch.ordinary(new int[]{-1, 0, 3, 5, 9, 12}, 2));
+//        System.out.println(BinarySearch.right(new int[]{-1, 0, 3, 3, 9, 12}, 3));
+        System.out.println(leet35(new int[]{1, 3, 5, 6}, 7));
+        System.out.println(interview1711(new String[]{"I",
+                "am", "a", "student", "from",
+                "a", "university", "in", "a", "city"}, "a", "student"));
     }
 }
