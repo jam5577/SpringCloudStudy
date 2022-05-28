@@ -114,9 +114,9 @@ public final class LeetCode {
             return;
         }
         StringBuilder builder = new StringBuilder(x);
-        System.out.println(builder.toString());
+        System.out.println(builder);
         StringBuilder reverse = builder.reverse();
-        System.out.println(reverse.toString());
+        System.out.println(reverse);
         System.out.println(reverse.toString().contentEquals(builder));
     }
 
@@ -196,7 +196,7 @@ public final class LeetCode {
         //XOR 异或运算，相同取0，相异取1,java中使用 ^ 进行运算
         //java的>>表示二进制右移，如14>>2就是14的二进制右移2位，移走的数字抛弃，计算剩下的值
         //>>>表示无符号右移，也叫逻辑右移，即若该数为正，则高位补0，而若该数为负数，则右移后高位同样补0。
-//        System.out.println(2 >> 5);
+        //System.out.println(2 >> 5);
 //        int i = 2 ^ 5 ^ 6;
 //        System.out.println(i);
         int[] nums = {1, 3};
@@ -628,7 +628,7 @@ public final class LeetCode {
         int res = words.length;
         String a = "abcdefghijklmnopqrstuvwxyz";
         for (char c : allowed.toCharArray()) {
-            a = a.replace(c, "".toCharArray()[0]);
+            a = a.replace(c, "".charAt(0));
         }
         for (String word : words) {
             for (char c : word.toCharArray()) {
@@ -676,7 +676,9 @@ public final class LeetCode {
 
     public static int leet804(String[] words) {
         String a = "abcdefghijklmnopqrstuvwxyz";
-        String[] b = new String[]{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+        String[] b = new String[]{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....",
+                "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...",
+                "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
         HashSet<String> set = new HashSet<>();
         HashMap<Character, String> map = new HashMap<>();
         for (int i = 0; i < a.length(); i++) {
@@ -1416,10 +1418,6 @@ public final class LeetCode {
         return root;
     }
 
-    public static boolean leet464(int maxChoosableInteger, int desiredTotal) {
-        return false;
-    }
-
     public static List<Integer> leet448(int[] nums) {
         int n = nums.length;
         for (int num : nums) {
@@ -1694,6 +1692,103 @@ public final class LeetCode {
         return res;
     }
 
+    public static String leet76(String s, String t) {
+        Map<Character, Integer> needs = new HashMap<>(), window = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            needs.put(c, needs.getOrDefault(c, 0) + 1);
+        }
+        int left = 0, right = 0;
+        int valid = 0;
+        int start = 0, len = Integer.MAX_VALUE;
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            right++;
+            if (needs.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (needs.get(c).equals(window.get(c))) {
+                    valid++;
+                }
+            }
+            while (valid == needs.size()) {
+                char d = s.charAt(left);
+                if (right - left < len) {
+                    start = left;
+                    len = right - left;
+                }
+                left++;
+                if (needs.containsKey(d)) {
+                    if (needs.get(d).equals(window.get(d))) {
+                        valid--;
+                    }
+                    window.put(d, window.get(d) - 1);
+                }
+            }
+        }
+        System.out.println(left);
+        System.out.println(len);
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
+    }
+
+    public static String leet1021(String s) {
+        int left = 0, right = 1;
+        LinkedList<String> temp = new LinkedList<>();
+        int l = 0, r = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                l++;
+            } else if (s.charAt(i) == ')') {
+                r++;
+            }
+            if (l == r) {
+                temp.add(s.substring(left, i + 1));
+                l = 0;
+                r = 0;
+                left = i + 1;
+            }
+        }
+        System.out.println(temp);
+        StringBuilder builder = new StringBuilder();
+        for (String s1 : temp) {
+            builder.append(s1, 1, s1.length() - 1);
+        }
+        return builder.toString();
+    }
+
+    public static String leet1021new(String s) {
+        StringBuilder sb = new StringBuilder();
+        int level = 0;
+        for (char c : s.toCharArray()) {
+            if (c == ')') --level;
+            if (level >= 1) sb.append(c);
+            if (c == '(') ++level;
+        }
+        return sb.toString();
+    }
+
+    public static String leet2000(String word, char ch) {
+        if (!word.contains(String.valueOf(ch))) {
+            return word;
+        }
+        int flag = word.indexOf(ch);
+        StringBuilder builder = new StringBuilder(word.substring(0, flag + 1));
+        return builder.reverse() + word.substring(flag + 1);
+    }
+
+    public static List<Integer> leet728(int left, int right) {
+        List<Integer> res = new ArrayList<>();
+        out:
+        for (int i = left; i <= right; i++) {
+            int cur = i;
+            while (cur != 0) {
+                int t = cur % 10;
+                if (t == 0 || i % t != 0) continue out;
+                cur /= 10;
+            }
+            res.add(i);
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 //        leet3();
 //        leet69();
@@ -1719,12 +1814,29 @@ public final class LeetCode {
 //        System.out.println(leet1281(234));
 //        System.out.println(leet1678("G()()()()(al)"));
 //        System.out.println(leet1342(14));
-//        System.out.println(leet1832("qklccnqeicrabxpggieplwjhakurwwhxbugbryvhazoofifidzvxczmpdjfcyiuhqyedxhzexvpitxknjogpetvgxeqrjuuxzzfblhmhbgibocbhtcbgyxzchlawvnhczlecsrioapggorouzcputqsxhvoxbqxxydiumxwg"));
+//        System.out.println(leet1832("qklccnqeicrabxpggieplwjhakurwwhxbugbryvhazoofifidzvxc
+//        zmpdjfcyiuhqyedxhzexvpitxknjogpetvgxeqrjuuxzzfblhmhbgibocbhtcbgyxzchlawvnhczlecsrio
+//        apggorouzcputqsxhvoxbqxxydiumxwg"));
 //        System.out.println(leet461(4, 14));
 //        System.out.println(leet1689("27346209830709182346"));
 //        test(10);
 //        long start = System.currentTimeMillis();
-//        System.out.println(leet11(new int[]{8361, 5302, 8672, 2400, 5150, 3527, 9216, 6713, 2902, 310, 555, 9176, 311, 9968, 5705, 3983, 7992, 8553, 6953, 9541, 5828, 1750, 6731, 3552, 5274, 7303, 3724, 5387, 9504, 1900, 937, 1146, 7266, 7943, 7911, 9055, 8046, 7180, 6516, 7810, 686, 5210, 1956, 4540, 7540, 2083, 1579, 4260, 2450, 2527, 6524, 5723, 6766, 777, 5694, 6018, 2880, 3653, 6011, 8172, 5943, 2862, 6594, 2902, 9887, 5878, 3065, 8197, 9195, 4560, 3428, 2209, 475, 852, 9488, 3368, 4319, 6230, 1975, 5829, 9474, 4490, 2067, 6048, 9136, 5344, 6022, 1787, 5553, 140, 5130, 524, 3450, 4008, 721, 6154, 5598, 8219, 4614, 3404, 8232, 9023, 4552, 7711, 6057, 5324, 8578, 3595, 4663, 4, 3703, 1429, 7921, 3085, 3694, 1461, 8932, 2632, 7046, 801, 6043, 617, 7565, 3469, 1627, 1464, 3050, 7982, 6702, 5467, 8604, 5515, 9155, 3260, 5040, 313, 8885, 929, 4103, 7947, 1139, 702, 1047, 2889, 1439, 3945, 4738, 2462, 8491, 7699, 376, 4639, 1329, 3644, 7408, 3665, 7417, 1388, 861, 7510, 7908, 4568, 2618, 4565, 7222, 2003, 1586, 9494, 1744, 7997, 7389, 9476, 2752, 701, 5925, 4963, 6859, 1634, 7170, 1336, 1514, 6757, 698, 5123, 4390, 7910, 7527, 9520, 156, 6402, 1428, 789, 3411, 106, 3206, 8216, 700, 994, 337, 9329, 5310, 7897, 1462, 5709, 872, 1482}));
+//        System.out.println(leet11(new int[]{8361, 5302, 8672, 2400, 5150, 3527, 9216,
+//        6713, 2902, 310, 555, 9176, 311, 9968, 5705, 3983, 7992, 8553, 6953,
+//        9541, 5828, 1750, 6731, 3552, 5274, 7303, 3724, 5387, 9504,
+//        1900, 937, 1146, 7266, 7943, 7911, 9055, 8046, 7180, 6516, 7810,
+//        686, 5210, 1956, 4540, 7540, 2083, 1579, 4260, 2450, 2527, 6524,
+//        5723, 6766, 777, 5694, 6018, 2880, 3653, 6011, 8172, 5943, 2862, 6594, 2902, 9887,
+//        5878, 3065, 8197, 9195, 4560, 3428, 2209, 475, 852, 9488, 3368, 4319, 6230, 1975,
+//        5829, 9474, 4490, 2067, 6048, 9136, 5344, 6022, 1787, 5553, 140, 5130, 524, 3450,
+//        4008, 721, 6154, 5598, 8219, 4614, 3404, 8232, 9023, 4552, 7711, 6057, 5324, 8578,
+//        3595, 4663, 4, 3703, 1429, 7921, 3085, 3694, 1461, 8932, 2632, 7046, 801, 6043, 617,
+//        7565, 3469, 1627, 1464, 3050, 7982, 6702, 5467, 8604, 5515, 9155, 3260, 5040, 313,
+//        8885, 929, 4103, 7947, 1139, 702, 1047, 2889, 1439, 3945, 4738, 2462, 8491, 7699,
+//        376, 4639, 1329, 3644, 7408, 3665, 7417, 1388, 861, 7510, 7908, 4568, 2618, 4565,
+//        7222, 2003, 1586, 9494, 1744, 7997, 7389, 9476, 2752, 701, 5925, 4963, 6859, 1634,
+//        7170, 1336, 1514, 6757, 698, 5123, 4390, 7910, 7527, 9520, 156, 6402, 1428, 789,
+//        3411, 106, 3206, 8216, 700, 994, 337, 9329, 5310, 7897, 1462, 5709, 872, 1482}));
 //        long end = System.currentTimeMillis();
 //        System.out.println((end - start));
 //        System.out.println(leet136(new int[]{4, 1, 2, 1, 2}));
@@ -1747,9 +1859,13 @@ public final class LeetCode {
 //        System.out.println(leet704(new int[]{-1, 0, 3, 5, 9, 12}, 2));
 //        System.out.println(BinarySearch.ordinary(new int[]{-1, 0, 3, 5, 9, 12}, 2));
 //        System.out.println(BinarySearch.right(new int[]{-1, 0, 3, 3, 9, 12}, 3));
-        System.out.println(leet35(new int[]{1, 3, 5, 6}, 7));
-        System.out.println(interview1711(new String[]{"I",
-                "am", "a", "student", "from",
-                "a", "university", "in", "a", "city"}, "a", "student"));
+//        System.out.println(leet35(new int[]{1, 3, 5, 6}, 7));
+//        System.out.println(interview1711(new String[]{"I",
+//                "am", "a", "student", "from",
+//                "a", "university", "in", "a", "city"}, "a", "student"));
+//        System.out.println(leet76("ADOBECODEBANC", "ABC"));
+//        System.out.println(leet1021("(()())(())"));
+//        System.out.println(leet1021new("(()())(())"));
+        System.out.println(leet2000("abcdefd", 'd'));
     }
 }
