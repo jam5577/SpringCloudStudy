@@ -1840,6 +1840,16 @@ public final class LeetCode {
         return arr;
     }
 
+    public static int leet1837(int n, int k) {
+        int res = 0, remain = n;
+        while (n != 0) {
+            remain = n % k;
+            n = n / k;
+            res += remain;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 //        leet3();
 //        leet69();
@@ -1919,6 +1929,7 @@ public final class LeetCode {
 //        System.out.println(leet1021new("(()())(())"));
 //        System.out.println(leet2000("abcdefd", 'd'));
 //        System.out.println(leet2283("1210"));
-        System.out.println(Arrays.toString(leet1299(new int[]{17, 18, 5, 4, 6, 1})));
+//        System.out.println(Arrays.toString(leet1299(new int[]{17, 18, 5, 4, 6, 1})));
+        System.out.println(leet1837(10, 10));
     }
 }
