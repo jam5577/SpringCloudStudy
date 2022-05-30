@@ -1789,6 +1789,57 @@ public final class LeetCode {
         return res;
     }
 
+    public static int leet1022(TreeNode root) {
+        return traverse1022(root, 0);
+    }
+
+    static int traverse1022(TreeNode root, int sum) {
+        if (root == null) {
+            return 0;
+        }
+        sum = (sum << 1) | root.val;
+        if (root.left == null && root.right == null) {
+            return sum;
+        }
+        return traverse1022(root.left, sum) + traverse1022(root.right, sum);
+    }
+
+    public static boolean leet2283(String num) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int n = num.length();
+        for (int i = 0; i < n; i++) {
+            char item = num.charAt(i);
+            Integer value = item - '0';
+            if (!map.containsKey(i)) {
+                map.put(i, 0);
+            }
+            map.put(value, map.getOrDefault(value, 0) + 1);
+        }
+        for (int i = 0; i < n; i++) {
+            char item = num.charAt(i);
+            Integer value = item - '0';
+            if (!value.equals(map.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int[] leet1299(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int max = Integer.MIN_VALUE;
+            for (int j = i + 1; j < arr.length; j++) {
+                max = Math.max(max, arr[j]);
+            }
+            if (i < arr.length - 1) {
+                arr[i] = max;
+            } else {
+                arr[i] = -1;
+            }
+        }
+        return arr;
+    }
+
     public static void main(String[] args) {
 //        leet3();
 //        leet69();
@@ -1866,6 +1917,8 @@ public final class LeetCode {
 //        System.out.println(leet76("ADOBECODEBANC", "ABC"));
 //        System.out.println(leet1021("(()())(())"));
 //        System.out.println(leet1021new("(()())(())"));
-        System.out.println(leet2000("abcdefd", 'd'));
+//        System.out.println(leet2000("abcdefd", 'd'));
+//        System.out.println(leet2283("1210"));
+        System.out.println(Arrays.toString(leet1299(new int[]{17, 18, 5, 4, 6, 1})));
     }
 }
