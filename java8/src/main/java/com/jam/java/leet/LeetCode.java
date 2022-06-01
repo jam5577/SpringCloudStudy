@@ -1850,6 +1850,25 @@ public final class LeetCode {
         return res;
     }
 
+    public static String leet1844(String s) {
+        char[] chars = s.toCharArray();
+        for (int i = 1; i < s.length(); i += 2) {
+            chars[i] = (char) (chars[i] - '0' + chars[i - 1]);
+        }
+        return new String(chars);
+    }
+
+    public static String leet2108(String[] words) {
+        for (String word : words) {
+            StringBuilder builder = new StringBuilder(word);
+            if (builder.reverse().toString().equals(word)) {
+                return word;
+            }
+        }
+        return "";
+    }
+
+
     public static void main(String[] args) {
 //        leet3();
 //        leet69();
@@ -1930,6 +1949,8 @@ public final class LeetCode {
 //        System.out.println(leet2000("abcdefd", 'd'));
 //        System.out.println(leet2283("1210"));
 //        System.out.println(Arrays.toString(leet1299(new int[]{17, 18, 5, 4, 6, 1})));
-        System.out.println(leet1837(10, 10));
+//        System.out.println(leet1837(10, 10));
+        System.out.println(leet1844("a1c1e1"));
+//        System.out.println((char) ('a' + 4));
     }
 }
