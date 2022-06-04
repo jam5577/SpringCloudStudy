@@ -196,9 +196,6 @@ public final class LeetCode {
         //XOR 异或运算，相同取0，相异取1,java中使用 ^ 进行运算
         //java的>>表示二进制右移，如14>>2就是14的二进制右移2位，移走的数字抛弃，计算剩下的值
         //>>>表示无符号右移，也叫逻辑右移，即若该数为正，则高位补0，而若该数为负数，则右移后高位同样补0。
-        //System.out.println(2 >> 5);
-//        int i = 2 ^ 5 ^ 6;
-//        System.out.println(i);
         int[] nums = {1, 3};
         int res = 0;
         //获取数组的子集：使用二进制进行计算，一个n长度的集合，子集个数为2^n个，包括子集
@@ -628,7 +625,7 @@ public final class LeetCode {
         int res = words.length;
         String a = "abcdefghijklmnopqrstuvwxyz";
         for (char c : allowed.toCharArray()) {
-            a = a.replace(c, "".charAt(0));
+            a = a.replace(c, ' ');
         }
         for (String word : words) {
             for (char c : word.toCharArray()) {
@@ -1370,10 +1367,10 @@ public final class LeetCode {
     }
 
     public static int leet961(int[] nums) {
-//        Arrays.sort(nums);
-//        int length = nums.length;
-//        boolean b = nums[length / 2] == nums[length / 2 + 1];
-//        return b ? nums[length / 2] : nums[length / 2 - 1];
+        /*Arrays.sort(nums);
+        int length = nums.length;
+        boolean b = nums[length / 2] == nums[length / 2 + 1];
+        return b ? nums[length / 2] : nums[length / 2 - 1];*/
         Set<Integer> set = new HashSet<>();
         Arrays.sort(nums);
         for (int num : nums) {
@@ -1841,7 +1838,7 @@ public final class LeetCode {
     }
 
     public static int leet1837(int n, int k) {
-        int res = 0, remain = n;
+        int res = 0, remain;
         while (n != 0) {
             remain = n % k;
             n = n / k;
@@ -1866,6 +1863,60 @@ public final class LeetCode {
             }
         }
         return "";
+    }
+
+    public static int leet929(String[] emails) {
+        Set<String> hashSet = new HashSet<>();
+        for (String email : emails) {
+            String[] split = email.split("@");
+            String s = split[0];
+            if (s.indexOf('+') > 0) {
+                s = s.substring(0, s.indexOf('+'));
+            }
+            hashSet.add(s.replace(".", "") + "@" + split[1]);
+        }
+        return hashSet.size();
+    }
+
+    public static void leet344(char[] s) {
+        int length = s.length, semi = length % 2 == 0 ? length / 2 : length / 2 + 1;
+        for (int i = 0; i < semi; i++) {
+            char c = s[i];
+            s[i] = s[length - i - 1];
+            s[length - i - 1] = c;
+            System.out.println(s[i]);
+            System.out.println(s[length - i - 1]);
+        }
+    }
+
+    public static String leet1528(String s, int[] indices) {
+        int length = s.length();
+        char[] res = new char[indices.length];
+        for (int i = 0; i < length; i++) {
+            res[indices[i]] = s.charAt(i);
+        }
+        return String.valueOf(res);
+    }
+
+    static class Leet478 {
+
+        double radius, x, y;
+
+        public Leet478(double radius, double x_center, double y_center) {
+            this.radius = radius;
+            this.x = x_center;
+            this.y = y_center;
+        }
+
+        public double[] randPoint() {
+            while (true) {
+                double a = new Random().nextDouble() * (2 * radius) - radius;
+                double b = new Random().nextDouble() * (2 * radius) - radius;
+                if (a * a + b * b <= radius * radius) {
+                    return new double[]{a + x, b + y};
+                }
+            }
+        }
     }
 
 
@@ -1950,7 +2001,9 @@ public final class LeetCode {
 //        System.out.println(leet2283("1210"));
 //        System.out.println(Arrays.toString(leet1299(new int[]{17, 18, 5, 4, 6, 1})));
 //        System.out.println(leet1837(10, 10));
-        System.out.println(leet1844("a1c1e1"));
+        //System.out.println(leet1844("a1c1e1"));
 //        System.out.println((char) ('a' + 4));
+//        System.out.println(leet929(new String[]{"a@leetcode.com", "b@leetcode.com", "c@leetcode.com"}));
+        leet344("hello".toCharArray());
     }
 }

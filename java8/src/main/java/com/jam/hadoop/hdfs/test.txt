@@ -1,0 +1,4 @@
+xiaoming xiaochen xiaohei
+xiaohei zhangsan
+xiaoliu zhangsan xiaoming lihua
+xiaohei xiaobai xiaohong xiaohua lihua

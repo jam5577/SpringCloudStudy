@@ -1,4 +1,4 @@
-package com.jam.hadoop;
+package com.jam.hadoop.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
@@ -60,9 +60,9 @@ public class HdfsTest {
     @Test
     public void upload() throws IOException {
         //创建上传流
-        FSDataOutputStream fsDataOutputStream = fileSystem.create(new Path("/test.log"));
+        FSDataOutputStream fsDataOutputStream = fileSystem.create(new Path("/wordcount/word.log"));
         //读取本地文件
-        FileInputStream fileInputStream = new FileInputStream("D:\\WebProject\\SpringCloudStudy\\java8\\src\\main\\java\\com\\jam\\hadoop\\test.txt");
+        FileInputStream fileInputStream = new FileInputStream("D:\\WebProject\\SpringCloudStudy\\java8\\src\\main\\java\\com\\jam\\hadoop\\hdfs\\test.txt");
         //复制流进行上传
         IOUtils.copyBytes(fileInputStream, fsDataOutputStream, 1024, true);
     }
