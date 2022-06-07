@@ -1,6 +1,6 @@
-package test;
+package com.jam.java.feature.core;
 
-import dao.MyInterface;
+import com.jam.java.feature.dao.MyInterface;
 import org.junit.Test;
 
 import java.util.Date;
@@ -12,29 +12,31 @@ import java.util.Date;
  * @create: 2022-02-22 12:57
  **/
 
-public abstract class testAbstract implements MyInterface {
-    public testAbstract() {
+public abstract class JavaAbstract implements MyInterface {
+    public JavaAbstract() {
     }
 
     public String name;
     public static int age;
     public static final Date today = new Date();
 
-    public String index(){
+    public String index() {
         return "hello,world";
     }
-    private boolean test(){
+
+    private boolean test() {
         return true;
     }
 
-    protected int help(){
+    protected int help() {
         return 1;
     }
+
     public abstract String run1();
 
-    static class test extends testAbstract{
+    static class test extends JavaAbstract {
 
-        static class test1 extends test{
+        static class test1 extends test {
 
         }
 
@@ -54,8 +56,8 @@ public abstract class testAbstract implements MyInterface {
 
     //方法不可用
     @Test
-    public void myTest(){
-        testAbstract test = new test();
+    public void myTest() {
+        JavaAbstract test = new test();
         System.out.println(test.run1());
     }
 

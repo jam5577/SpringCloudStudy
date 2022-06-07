@@ -1,4 +1,4 @@
-package test;
+package com.jam.java.feature.core;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package dao;
+package com.jam.java.feature.dao;
 
 /**
  * @program: SpringbootStudy

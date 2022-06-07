@@ -1919,6 +1919,147 @@ public final class LeetCode {
         }
     }
 
+    public static int[] offer003(int n) {
+        int[] res = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            res[i] = Integer.bitCount(i);
+        }
+        return res;
+    }
+
+    public static int leet1748(int[] nums) {
+        int res = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
+            } else {
+                map.put(num, 0);
+            }
+        }
+        for (Integer i : map.keySet()) {
+            res += map.get(i) == 1 ? i : 0;
+        }
+        return res;
+    }
+
+    public static int leet1732(int[] gain) {
+        int res = 0, max = 0;
+        for (int j : gain) {
+            max += j;
+            res = Math.max(res, max);
+        }
+        return res;
+    }
+
+    public static boolean leet657(String moves) {
+        int x = 0, y = 0;
+        for (char c : moves.toCharArray()) {
+            switch (c) {
+                case 'U':
+                    y++;
+                    continue;
+                case 'R':
+                    x++;
+                    continue;
+                case 'D':
+                    y--;
+                    continue;
+                case 'L':
+                    x--;
+            }
+        }
+        return x == 0 && y == 0;
+    }
+
+    static class MyCalendarThree {
+
+        private final TreeMap<Integer, Integer> map;
+
+        public MyCalendarThree() {
+            map = new TreeMap<>();
+        }
+
+        public int book(int start, int end) {
+            int res = 0;
+            int max = 0;
+            map.put(start, map.getOrDefault(start, 0) + 1);
+            map.put(end, map.getOrDefault(end, 0) - 1);
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                max += entry.getValue();
+                res = Math.max(res, max);
+            }
+            return res;
+        }
+    }
+
+    public static boolean leet1812(String coordinates) {
+        int letter = coordinates.charAt(0) - 'a' + 1, number = coordinates.charAt(1) - '0';
+        return ((letter + number) & 1) == 0;
+    }
+
+    public static int leet561(int[] nums) {
+        int res = 0;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i += 2) {
+            res += nums[i];
+        }
+        return res;
+    }
+
+    public static int interview0202(ListNode head, int k) {
+        ListNode fast = head, slow = head;
+        for (int i = 0; i < k; i++) {
+            fast = head.next;
+        }
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow.val;
+    }
+
+    public static int leet1979(int[] nums) {
+        Arrays.sort(nums);
+        int res = 0;
+        for (int i = nums[0]; i > 0; i--) {
+            if (nums[0] % i == 0 && nums[nums.length - 1] % i == 0) {
+                res = i;
+                break;
+            }
+        }
+        return res;
+    }
+
+    public static int leet1827(int[] nums) {
+        int res = 0, step = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] <= nums[i - 1]) {
+                res += step - nums[i] + 1;
+                nums[i] = step + 1;
+                step = nums[i];
+            } else {
+                step = nums[i];
+            }
+        }
+        return res;
+    }
+
+    public static boolean leet1037(int[][] points) {
+        int k1 = (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]);
+        int k2 = (points[2][1] - points[0][1]) * (points[1][0] - points[0][0]);
+        return k1 != k2;
+
+    }
+
+    public static int[] offer17(int n) {
+        int length = (int) Math.pow(10, n) - 1;
+        int[] res = new int[length];
+        for (int i = 0; i < length; i++) {
+            res[i] = i + 1;
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
 //        leet3();
@@ -2004,6 +2145,12 @@ public final class LeetCode {
         //System.out.println(leet1844("a1c1e1"));
 //        System.out.println((char) ('a' + 4));
 //        System.out.println(leet929(new String[]{"a@leetcode.com", "b@leetcode.com", "c@leetcode.com"}));
-        leet344("hello".toCharArray());
+//        leet344("hello".toCharArray());
+//        System.out.println(Integer.bitCount(2));
+//        System.out.println(leet1748(new int[]{1, 1, 1, 1, 1}));
+//        System.out.println(leet1732(new int[]{-5, 1, 5, 0, -7}));
+//        System.out.println(leet657("UD"));
+//        System.out.println('c' - 'a');
+        System.out.println(10 & 1);
     }
 }

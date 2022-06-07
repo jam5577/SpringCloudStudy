@@ -1,11 +1,9 @@
-package test;
+package com.jam.java.feature.core;
 
-import anno.MyAnnotation;
-import dao.MyInterface;
-import entity.Employee;
+import com.jam.java.feature.anno.MyAnnotation;
+import com.jam.java.feature.dao.MyInterface;
+import com.jam.java.feature.entity.Employee;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.PrintStream;
@@ -28,14 +26,11 @@ import java.util.stream.Stream;
  **/
 
 @Component
-public class MyTest {
-
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+@SuppressWarnings("unused")
+public class JavaFeature {
 
     //region 测试lambda表达式
     @Test
-
     public void testLambda() {
         //匿名内部类可以直接new一个接口，并在new出来的接口函数后加上{}表示重写这个接口里的方法
         Comparator<Integer> comparator = new Comparator<Integer>() {
@@ -288,7 +283,7 @@ public class MyTest {
         System.out.println(list);
 
         List<String> list1 = Arrays.asList("a", "b", "c");
-        MyTest test = new MyTest();
+        JavaFeature test = new JavaFeature();
         list1.stream()
                 .flatMap(test::filterCharacter)
                 .forEach(System.out::print);
@@ -663,7 +658,7 @@ public class MyTest {
     @MyAnnotation("World")
     @MyAnnotation
     public void testAnnotation() throws NoSuchMethodException {
-        Class<MyTest> clazz = MyTest.class;
+        Class<JavaFeature> clazz = JavaFeature.class;
         Method method = clazz.getMethod("testAnnotation");
         MyAnnotation[] mas = method.getAnnotationsByType(MyAnnotation.class);
         for (MyAnnotation ma : mas) {
@@ -734,7 +729,7 @@ public class MyTest {
 
     @Test
     public void test3() {
-        MyInterface test = new testAbstract.test();
+        MyInterface test = new JavaAbstract.test();
         System.out.println(test.count(1, 3));
         List<String> list = new ArrayList<>();
         String s = "abc";

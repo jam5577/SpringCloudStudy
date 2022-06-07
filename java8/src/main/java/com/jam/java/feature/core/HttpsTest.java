@@ -1,10 +1,13 @@
-package test;
+package com.jam.java.feature.core;
 
+import javax.crypto.Cipher;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.security.*;
-import java.security.cert.*;
-import javax.crypto.Cipher;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.security.cert.X509Certificate;
 
 public class HttpsTest {
     public static void main(String[] args) throws Exception {

@@ -1,4 +1,4 @@
-package entity;
+package com.jam.java.feature.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
