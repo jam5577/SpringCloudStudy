@@ -1,4 +1,4 @@
-package com.jam.utils.email;
+package com.jam.unfinished.email;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
