@@ -2075,6 +2075,37 @@ public final class LeetCode {
         return a == b;
     }
 
+    public static TreeNode leet700(TreeNode root, int val) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val < val) {
+            root = root.right;
+        } else if (root.val > val) {
+            root = root.left;
+        } else {
+            return root;
+        }
+        return leet700(root, val);
+    }
+
+    public static String leet709(String s) {
+        return s.toLowerCase();
+    }
+
+    public static boolean leet1880(String firstWord, String secondWord, String targetWord) {
+        return parse(targetWord) == parse(firstWord) + parse(secondWord);
+    }
+
+    static int parse(String s) {
+        StringBuilder builder = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            builder.append(c - 'a');
+        }
+        System.out.println(builder);
+        return Integer.parseInt(builder.toString());
+    }
+
     public static void main(String[] args) {
 //        leet3();
 //        leet69();
@@ -2165,6 +2196,8 @@ public final class LeetCode {
 //        System.out.println(leet1732(new int[]{-5, 1, 5, 0, -7}));
 //        System.out.println(leet657("UD"));
 //        System.out.println('c' - 'a');
-        System.out.println(10 & 1);
+//        System.out.println(10 & 1);
+//        System.out.println(Integer.valueOf("021"));
+        System.out.println(parse("acb"));
     }
 }

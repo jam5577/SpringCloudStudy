@@ -1,5 +1,6 @@
 package com.jam.java.timer;
 
+import org.junit.Test;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +20,8 @@ import java.util.TimerTask;
 @EnableScheduling
 public class TestTimer {
 
-    public static void main(String[] args) {
+    @Test
+    public void start() {
         Timer timer = new Timer();
         //执行定时任务
         //参数1：timerTask对象 定时任务对象

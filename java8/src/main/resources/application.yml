@@ -17,6 +17,13 @@ spring:
     host: 127.0.0.1
     port: 6379
 
+  rabbitmq:
+    host: 192.168.52.129
+    port: 5672
+    username: ems
+    password: ems
+    virtual-host: /ems
+
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
   configuration:
