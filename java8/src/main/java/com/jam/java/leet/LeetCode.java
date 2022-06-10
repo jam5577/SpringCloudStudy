@@ -12,6 +12,30 @@ import java.util.*;
 @SuppressWarnings("unused")
 public final class LeetCode {
 
+    static void binary() {
+        System.out.println("╔═════");
+        System.out.println("<========================================================================>");
+        System.out.println("==位运算==按位与&==按位或|==异或XOR ^==取反~==左移<<==右移>>==无符号右移>>>==");
+        System.out.println("===============================按位与  &==================================");
+        System.out.println("== \t\t\t数字5的二进制是:" + Integer.toBinaryString(5) + "\t\t\t数字4的二进制是:" + Integer.toBinaryString(4) + "\t\t\t\t==");
+        System.out.println("== \t\t\t\t\t二者按位与&的结果是:  5 & 4 = " + Integer.toBinaryString(5 & 4) + "\t\t\t\t\t==");
+        System.out.println("================================按位或  |==================================");
+        System.out.println("==二者按位或|的结果是:  5 | 4 = " + Integer.toBinaryString(5 | 4) + "==");
+        System.out.println("================================异或XOR  ^=================================");
+        System.out.println("==二者按位异或^的结果是:  5 ^ 4 = " + Integer.toBinaryString(5 ^ 4) + "==");
+        System.out.println("================================取反  ~==================================");
+        System.out.println("==数字按位取反~的结果是:  ~ 4 = " + Integer.toBinaryString(~4) + "==");
+        System.out.println("================================左移  <<==================================");
+        System.out.println("==数字按位左移<<的结果是:  4 << 2= " + Integer.toBinaryString(4 << 2) + "==");
+        System.out.println("================================右移  >>==================================");
+        System.out.println("==数字按位右移>>的结果是:  4 >> 2= " + Integer.toBinaryString(4 >> 2) + "==");
+        System.out.println("================================无符号右移  >>>==================================");
+        System.out.println("==数字按位无符号右移>>>的结果是:  -4 >>> 2= " + Integer.toBinaryString(-4 >>> 2) + "==");
+        System.out.println("<========================================================================>");
+
+
+    }
+
     /**
      * 链表构造
      */
@@ -2106,7 +2130,17 @@ public final class LeetCode {
         return Integer.parseInt(builder.toString());
     }
 
+    public static int leet191(int n) {
+        int res = 0;
+        while (n != 0) {
+            n = n & (n - 1);
+            res++;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
+        binary();
 //        leet3();
 //        leet69();
 //        removeEmptyFile();
@@ -2198,6 +2232,9 @@ public final class LeetCode {
 //        System.out.println('c' - 'a');
 //        System.out.println(10 & 1);
 //        System.out.println(Integer.valueOf("021"));
-        System.out.println(parse("acb"));
+//        System.out.println(parse("acb"));
+//        System.out.println(Integer.toBinaryString(10));
+//        System.out.println(Integer.toBinaryString(9));
+//        System.out.println(Integer.toBinaryString(10 | 9));
     }
 }

@@ -1,4 +1,4 @@
-package com.jam.java.guide;
+package com.jam.java.juc;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
