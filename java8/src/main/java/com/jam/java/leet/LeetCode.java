@@ -2139,8 +2139,98 @@ public final class LeetCode {
         return res;
     }
 
+    public static int leet926(String s) {
+        int dp = 0, count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '1') {
+                count++;
+            } else {
+                dp = Math.min(dp + 1, count);
+            }
+        }
+        return dp;
+    }
+
+    public static String leet1309(String s) {
+        StringBuilder sb = new StringBuilder();
+        char[] map = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        for (int i = 0; i < s.length(); ) {
+            if (i + 2 < s.length() && s.charAt(i + 2) == '#') {
+                sb.append(map[Integer.parseInt(s.substring(i, i + 2)) - 1]);
+                i += 3;
+            } else {
+                sb.append((char) (map[s.charAt(i) - '0'] - 1));
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+
+    public static int[] leet942(String s) {
+        int n = s.length(), min = 0, max = n;
+        int[] res = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            res[i] = s.charAt(i) == 'I' ? min++ : max--;
+        }
+        res[n] = min;
+        return res;
+    }
+
+    public static List<String> leet890(String[] words, String pattern) {
+        List<String> res = new ArrayList<>();
+        Map<Character, Character> wor = new HashMap<>();
+        Map<Character, Character> pat = new HashMap<>();
+        for (String word : words) {
+            int flag = 0;
+            for (int i = 0; i < word.toCharArray().length; i++) {
+                wor.put(pattern.charAt(i), wor.getOrDefault(pattern.charAt(i), word.charAt(i)));
+                pat.put(word.charAt(i), pat.getOrDefault(word.charAt(i), pattern.charAt(i)));
+                if (word.charAt(i) == wor.get(pattern.charAt(i)) && pattern.charAt(i) == pat.get(word.charAt(i))) {
+                    flag++;
+                }
+            }
+            wor.clear();
+            pat.clear();
+            if (flag == pattern.length()) {
+                res.add(word);
+            }
+        }
+        return res;
+    }
+
+    public static boolean leet2119(int num) {
+        if (num == 0) {
+            return true;
+        }
+        String s = String.valueOf(num);
+        int length = s.length();
+        return s.charAt(length - 1) == '0';
+    }
+
+    public static int leet1051(int[] heights) {
+        int n = heights.length;
+        int[] old = new int[n];
+        System.arraycopy(heights, 0, old, 0, n);
+        int res = 0;
+        Arrays.sort(heights);
+        for (int i = 0; i < n; i++) {
+            if (old[i] != heights[i]) {
+                res++;
+            }
+        }
+        System.out.println(Arrays.toString(old));
+        System.out.println(Arrays.toString(heights));
+        return res;
+    }
+
+    public static int leet1464(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        return (nums[n - 1] - 1) * (nums[n - 2] - 1);
+    }
+
     public static void main(String[] args) {
-        binary();
+//        binary();
 //        leet3();
 //        leet69();
 //        removeEmptyFile();
@@ -2236,5 +2326,18 @@ public final class LeetCode {
 //        System.out.println(Integer.toBinaryString(10));
 //        System.out.println(Integer.toBinaryString(9));
 //        System.out.println(Integer.toBinaryString(10 | 9));
+//        System.out.println(leet926("0100001"));
+//        System.out.println((char) ((int) 'z' - 25));
+//        System.out.println(leet1309("10#11#12"));
+//        System.out.println(Arrays.toString(new int[3]));//默认全为0
+//        System.out.println(Arrays.toString(leet942("IDID")));
+//        int i = 0, min = 0;
+        //i += min++;//这样写的时候是先赋值再++
+//        int[] res = {0, 1, 2, 3};
+        //res[i++] 相当于 res[0]，会先执行res[i]，再++
+//        System.out.println(res[i++]);
+//        System.out.println(leet2119(5260));
+//        System.out.println(leet1051(new int[]{1, 1, 4, 2, 1, 3}));
+        System.out.println(leet1464(new int[]{3, 4, 5, 2}));
     }
 }
