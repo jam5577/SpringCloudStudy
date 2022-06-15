@@ -2229,6 +2229,68 @@ public final class LeetCode {
         return (nums[n - 1] - 1) * (nums[n - 2] - 1);
     }
 
+    public static int[] leet498(int[][] mat) {
+        int m = mat.length, n = mat[0].length, pos = 0;
+        int[] res = new int[m * n];
+        for (int i = 0; i < m + n - 1; i++) {
+            if (i % 2 == 1) {
+                int x = i < n ? 0 : i - n + 1;
+                int y = i < n ? i : n - 1;
+                while (x < m && y >= 0) {
+                    res[pos] = mat[x][y];
+                    pos++;
+                    x++;
+                    y--;
+                }
+            } else {
+                int x = i < m ? i : m - 1;
+                int y = i < m ? 0 : i - m + 1;
+                while (x >= 0 && y < n) {
+                    res[pos] = mat[x][y];
+                    pos++;
+                    x--;
+                    y++;
+                }
+            }
+        }
+        return res;
+    }
+
+    public static int leet2057(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (i % 10 == nums[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static boolean leet2206(int[] nums) {
+        int left = 0, right = 1;
+        Arrays.sort(nums);
+        while (right < nums.length) {
+            if (nums[left] != nums[right]) {
+                return false;
+            }
+            left += 2;
+            right += 2;
+        }
+        return true;
+    }
+
+    public static int leet2169(int num1, int num2) {
+        int res = 0;
+        while (num1 > 0 && num2 > 0) {
+            if (num1 >= num2) {
+                num1 = num1 - num2;
+            } else {
+                num2 = num2 - num1;
+            }
+            res++;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 //        binary();
 //        leet3();
@@ -2338,6 +2400,7 @@ public final class LeetCode {
 //        System.out.println(res[i++]);
 //        System.out.println(leet2119(5260));
 //        System.out.println(leet1051(new int[]{1, 1, 4, 2, 1, 3}));
-        System.out.println(leet1464(new int[]{3, 4, 5, 2}));
+//        System.out.println(leet1464(new int[]{3, 4, 5, 2}));
+        System.out.println(leet2169(2, 3));
     }
 }

@@ -105,9 +105,7 @@ public class RpcClientManager {
         });
         try {
             channel = bootstrap.connect("localhost", 8080).sync().channel();
-            channel.closeFuture().addListener(future -> {
-                group.shutdownGracefully();
-            });
+            channel.closeFuture().addListener(future -> group.shutdownGracefully());
         } catch (Exception e) {
             log.error("client error", e);
         }

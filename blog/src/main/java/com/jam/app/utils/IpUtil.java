@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author 11921
  */
-@SuppressWarnings("all")
+//@SuppressWarnings("all")
 public class IpUtil {
 
     /**
@@ -26,7 +26,7 @@ public class IpUtil {
      * @return ip地址
      */
     public static String getIpAddr(HttpServletRequest request) {
-        String ipAddress = null;
+        String ipAddress;
         try {
             ipAddress = request.getHeader("x-forwarded-for");
             if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
@@ -45,6 +45,7 @@ public class IpUtil {
                     } catch (UnknownHostException e) {
                         e.printStackTrace();
                     }
+                    assert inet != null;
                     ipAddress = inet.getHostAddress();
                 }
             }
@@ -71,8 +72,8 @@ public class IpUtil {
         try {
             URL url = new URL("http://opendata.baidu.com/api.php?query=" + ipAddress + "&co=&resource_id=6006&oe=utf8");
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream(), "utf-8"));
-            String line = null;
-            StringBuffer result = new StringBuffer();
+            String line;
+            StringBuilder result = new StringBuilder();
             while ((line = reader.readLine()) != null) {
                 result.append(line);
             }

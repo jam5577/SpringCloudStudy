@@ -9,12 +9,28 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>flink-basis-java</module>
+        <module>flink-kafka-integration</module>
+        <module>flink-state-management</module>
+        <module>hadoop-word-count</module>
+        <module>hbase-observer-coprocessor</module>
+        <module>hdfs-java-api</module>
+        <module>kafka-basis</module>
+        <module>spark-streaming-basis</module>
+        <module>spark-streaming-kafka</module>
+        <module>spring-boot-mybatis-phoenix</module>
+        <module>spring-mybatis-phoenix</module>
+        <module>storm-hbase-integration</module>
+        <module>storm-kafka-integration</module>
+        <module>storm-word-count</module>
+        <module>curator</module>
         <module>java8</module>
         <module>common</module>
         <module>elasticsearch</module>
         <module>blog</module>
         <module>seckill</module>
         <module>bilimusic</module>
+        <module>springboot-file</module>
     </modules>
 
     <!--统一版本管理-->
@@ -39,6 +55,10 @@
         <javax.mail.version>1.4.7</javax.mail.version>
         <dom4j.version>2.1.3</dom4j.version>
         <hadoop.version>2.10.1</hadoop.version>
+        <fileupload.version>1.4</fileupload.version>
+        <io.version>2.5</io.version>
+        <httpcore.version>4.4.15</httpcore.version>
+        <httpclient.version>4.5.11</httpclient.version>
     </properties>
 
     <!--统一依赖管理-->
@@ -117,13 +137,6 @@
                 <version>${javax.mail.version}</version>
             </dependency>
             <dependency>
-                <groupId>cplex</groupId>
-                <artifactId>cplex</artifactId>
-                <version>1.0.1</version>
-                <scope>system</scope>
-                <systemPath>D:/Environment/Maven-repository/cplex/cplex.jar</systemPath>
-            </dependency>
-            <dependency>
                 <groupId>org.dom4j</groupId>
                 <artifactId>dom4j</artifactId>
                 <version>${dom4j.version}</version>
@@ -192,6 +205,27 @@
                         <artifactId>slf4j-log4j12</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <!--文件上传包-->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
