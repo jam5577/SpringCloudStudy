@@ -7,10 +7,21 @@
         <groupId>com.jam</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
+    <modules>
+        <module>src/main/java/com/jam/oauth/click</module>
+        <module>src/main/java/com/jam/oauth/custom-error</module>
+        <module>src/main/java/com/jam/oauth/logout</module>
+        <module>src/main/java/com/jam/oauth/simple</module>
+        <module>src/main/java/com/jam/oauth/two-providers</module>
+    </modules>
+
+
     <artifactId>springboot-security-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-security-web</name>
     <description>非前后端分离项目</description>
+    <packaging>pom</packaging>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -46,6 +57,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
     </dependencies>
 

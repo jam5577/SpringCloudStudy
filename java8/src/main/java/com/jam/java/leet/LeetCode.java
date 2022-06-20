@@ -144,30 +144,27 @@ public final class LeetCode {
         System.out.println(reverse.toString().contentEquals(builder));
     }
 
-    public static void leet13() {
+    public static int leet13(String s) {
         //map集合存储对应的字符和数值
         //读取到字符串中 I X C 的字符时，先查看下一个字符是多少，如果有相关的就将其提取出来
-        String s = "III";
-        HashMap<Character, Integer> map = new HashMap<>(7);
-        map.put("I".toCharArray()[0], 1);
-        map.put("V".toCharArray()[0], 5);
-        map.put("X".toCharArray()[0], 10);
-        map.put("L".toCharArray()[0], 50);
-        map.put("C".toCharArray()[0], 100);
-        map.put("D".toCharArray()[0], 500);
-        map.put("M".toCharArray()[0], 1000);
-        char[] chars = s.toCharArray();
-        int j = 0;
-        for (int i = 1; i < s.length(); ++i) {
-            boolean b = chars[i - 1] >= chars[i];
-            System.out.printf("%s", b);
-            if (b) {
-                j += map.get(chars[i - 1]);
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+        int n = s.length(), res = 0;
+        for (int i = 0; i < n; i++) {
+            int value = map.get(s.charAt(i));
+            if (i < n - 1 && value < map.get(s.charAt(i + 1))) {
+                res -= value;
             } else {
-                j -= map.get(chars[i - 1]);
+                res += value;
             }
         }
-        System.out.println(j);
+        return res;
     }
 
     public static void leet69() {
@@ -2291,12 +2288,169 @@ public final class LeetCode {
         return res;
     }
 
+    public static String leet1768(String word1, String word2) {
+        int len1 = word1.length(), len2 = word2.length(), flag = 0;
+        char[] res = new char[len1 + len2];
+        for (int i = 0; i < len1 || i < len2; i++) {
+            if (i < len1) {
+                res[flag++] = word1.charAt(i);
+            }
+            if (i < len2) {
+                res[flag++] = word2.charAt(i);
+            }
+        }
+        return new String(res);
+    }
+
+    public static int leet762(int left, int right) {
+        int res = 0;
+        for (int i = left; i <= right; i++) {
+            int count = Integer.bitCount(i);
+            if (isPrime(count)) {
+                res++;
+            }
+        }
+        return res;
+    }
+
+    static boolean isPrime(int j) {
+        if (j < 2) {
+            return false;
+        }
+        for (int i = 2; i * i <= j; i++) {
+            if (j % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int leet532(int[] nums, int k) {
+        Set<Integer> visited = new HashSet<>();
+        Set<Integer> res = new HashSet<>();
+        for (int num : nums) {
+            if (visited.contains(num - k)) {
+                res.add(num - k);
+            }
+            if (visited.contains(num + k)) {
+                res.add(num);
+            }
+            visited.add(num);
+        }
+        return res.size();
+    }
+
+    public static int leet1323(int num) {
+        String n = String.valueOf(num);
+        int flag = n.length() - 1;
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < n.length(); i++) {
+            if (n.charAt(i) == '6') {
+                builder.append('9');
+                flag = i;
+                break;
+            }
+            builder.append(n.charAt(i));
+        }
+        return Integer.parseInt(builder.append(n.substring(flag + 1)).toString());
+    }
+
+    public static ListNode offer024(ListNode head) {
+        ListNode cur = head;
+        ListNode pre = null;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    public static String leet1859(String s) {
+        String[] split = s.split(" ");
+        String[] res = new String[split.length];
+        for (String ss : split) {
+            int c = Integer.parseInt(String.valueOf(ss.charAt(ss.length() - 1)));
+            res[c] = ss.substring(0, ss.length() - 2);
+        }
+        return Arrays.toString(res);
+    }
+
+    public static void leet1089(int[] arr) {
+        int n = arr.length;
+        int top = 0;
+        int i = -1;
+        while (top < n) {
+            i++;
+            if (arr[i] != 0) {
+                top++;
+            } else {
+                top += 2;
+            }
+        }
+        int j = n - 1;
+        if (top == n + 1) {
+            arr[j] = 0;
+            j--;
+            i--;
+        }
+        while (j >= 0) {
+            arr[j] = arr[i];
+            j--;
+            if (arr[i] == 0) {
+                arr[j] = arr[i];
+                j--;
+            }
+            i--;
+        }
+    }
+
+    public static List<List<Integer>> leet118(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> arrayList = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    arrayList.add(1);
+                } else {
+                    arrayList.add(res.get(i - 1).get(j - 1) + res.get(i - 1).get(j));
+                }
+            }
+            res.add(arrayList);
+        }
+        return res;
+    }
+
+    public static boolean leet572(TreeNode root, TreeNode subRoot) {
+        if (root == null) {
+            return subRoot == null;
+        }
+        if (isSameTree(root, subRoot)) {
+            return true;
+        }
+        return leet572(root.left, subRoot) || leet572(root.right, subRoot);
+    }
+
+    static boolean isSameTree(TreeNode root, TreeNode subRoot) {
+        if (root == null && subRoot == null) {
+            return true;
+        }
+        if (root == null || subRoot == null) {
+            return false;
+        }
+        if (root.val != subRoot.val) {
+            return false;
+        }
+        return isSameTree(root.left, subRoot.left) && isSameTree(root.right, subRoot.right);
+    }
+
     public static void main(String[] args) {
 //        binary();
 //        leet3();
 //        leet69();
 //        removeEmptyFile();
-//        leet13();
+//        System.out.println(leet13("III"));
 //        leet1929();
 //        leet1863();
 //        leet1480();
@@ -2401,6 +2555,10 @@ public final class LeetCode {
 //        System.out.println(leet2119(5260));
 //        System.out.println(leet1051(new int[]{1, 1, 4, 2, 1, 3}));
 //        System.out.println(leet1464(new int[]{3, 4, 5, 2}));
-        System.out.println(leet2169(2, 3));
+//        System.out.println(leet2169(2, 3));
+//        System.out.println((int) '2');
+//        System.out.println(Integer.parseInt(String.valueOf('2')));
+        //leet1089(new int[]{1, 0, 2, 3, 0, 4, 5, 0});
+//        System.out.println((char) (5 + 96));
     }
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -32,7 +33,7 @@ public class DownloadController {
 
     private static final String UTF8 = "utf-8";
 
-    private static final String FILE_PATH = "E:\\Downloads\\SZT-bigdata-master.zip";
+    private static final String FILE_PATH = "E:\\Downloads\\mongodb-linux-x86_64-rhel70-4.4.14.tgz";
 
     /**
      * 分片下载的分片大小
@@ -121,7 +122,7 @@ public class DownloadController {
             //获取到response的输出流，也就是一个文件输出到浏览器的流
             os = new BufferedOutputStream(response.getOutputStream());
             //获取文件输入流，也就是将文件读取入流中
-            is = new BufferedInputStream(new FileInputStream(file));
+            is = new BufferedInputStream(Files.newInputStream(file.toPath()));
             //在下载第一个之后的分片时，需要将之前已经读过的分片跳过
             is.skip(pos);
 
@@ -170,7 +171,7 @@ public class DownloadController {
                     //开始位置是第i个分片的开始位置
                     .start(i * PARTIAL_PAGE)
                     //终止位置是下一个分片的开始位置 - 1
-                    .end((i * PARTIAL_PAGE) - 1)
+                    .end((i + 1) * PARTIAL_PAGE - 1)
                     //当前分片的位置
                     .page(i)
                     //当前分片文件名
@@ -245,7 +246,7 @@ public class DownloadController {
         //获取file对象
         File file = new File(TEMP_PATH, filename);
         //获取输出流
-        BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+        BufferedOutputStream os = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
         for (int i = 0; i <= page; i++) {
             //对于每一个分片都进行合并
             File temp = new File(TEMP_PATH, i + "-" + filename);
