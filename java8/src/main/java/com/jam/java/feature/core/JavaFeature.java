@@ -815,5 +815,29 @@ public class JavaFeature {
         ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
     }
 
+    private void swap(int num1, int num2) {
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+    }
 
+    /**
+     * java中是值传递，只会对形参做修改，不会对实参修改
+     * 交换前，a 的值：100
+     * 交换前，b 的值：200
+     * 交换后，a 的值：100
+     * 交换后，b 的值：200
+     */
+    @Test
+    public void swap() {
+        // 局部变量声明
+        int a = 100;
+        int b = 200;
+        System.out.println("交换前，a 的值：" + a);
+        System.out.println("交换前，b 的值：" + b);
+        // 调用函数来交换值
+        swap(a, b);
+        System.out.println("交换后，a 的值：" + a);
+        System.out.println("交换后，b 的值：" + b);
+    }
 }
