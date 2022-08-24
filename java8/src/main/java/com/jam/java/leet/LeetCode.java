@@ -2445,6 +2445,308 @@ public final class LeetCode {
         return isSameTree(root.left, subRoot.left) && isSameTree(root.right, subRoot.right);
     }
 
+    public static int[] leet821(String s, char c) {
+        int length = s.length();
+        int[] res = new int[length];
+        for (int i = 0, idx = -length; i < length; ++i) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+            res[i] = i - idx;
+        }
+
+        for (int i = length - 1, idx = 2 * length; i >= 0; --i) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+            res[i] = Math.min(res[i], idx - i);
+        }
+        return res;
+    }
+
+    public static String leet67(String a, String b) {
+        return Integer.toBinaryString(Integer.parseInt(a, 2) + Integer.parseInt(b, 2));
+    }
+
+    public static String leet1047(String s) {
+        StringBuilder res = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (res.length() > 0 && res.charAt(res.length() - 1) == c) {
+                res.deleteCharAt(res.length() - 1);
+                continue;
+            }
+            res.append(c);
+        }
+        return res.toString();
+    }
+
+    public static void leet88(int[] nums1, int m, int[] nums2, int n) {
+        int[] temp1 = Arrays.copyOf(nums1, m), temp2 = Arrays.copyOf(nums2, n);
+        int length = Math.min(m, n);
+        for (int i = 0; i < length; i++) {
+            nums1[i] = Math.min(temp1[i], temp2[i]);
+        }
+        if (m > length) {
+            if (m - length - length >= 0) System.arraycopy(temp1, length, nums1, length, m - length - length);
+        }
+        if (n > length) {
+            if (n - length - length >= 0) System.arraycopy(temp2, length, nums1, length, n - length - length);
+        }
+    }
+
+    public static String leet648(List<String> dictionary, String sentence) {
+        Set<String> dictionarySet = new HashSet<>(dictionary);
+        String[] words = sentence.split(" ");
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            for (int j = 0; j < word.length(); j++) {
+                if (dictionarySet.contains(word.substring(0, 1 + j))) {
+                    words[i] = word.substring(0, 1 + j);
+                    break;
+                }
+            }
+        }
+        return String.join(" ", words);
+    }
+
+    public static int leet1974(String word) {
+        byte[] bytes = word.getBytes();
+        int seconds = Math.min(26 - Math.abs(97 - bytes[0]), Math.abs(97 - bytes[0])) + 1;
+        for (int i = 1; i < bytes.length; i++) {
+            int tmp = Math.abs(bytes[i - 1] - bytes[i]);
+            seconds += Math.min(26 - tmp, tmp) + 1;
+        }
+        return seconds;
+    }
+
+    public static int leet682(String[] ops) {
+        LinkedList<Integer> arrayList = new LinkedList<>();
+        int res = 0;
+        for (String op : ops) {
+            switch (op) {
+                case "C":
+                    res -= arrayList.getLast();
+                    arrayList.removeLast();
+                case "D":
+                    arrayList.addLast(arrayList.getLast() * 2);
+                    res += arrayList.getLast();
+                case "+":
+                    arrayList.addLast(arrayList.get(arrayList.size() - 2) + arrayList.getLast());
+                    res += arrayList.getLast();
+                default:
+                    res += Integer.parseInt(op);
+                    arrayList.addLast(Integer.parseInt(op));
+            }
+        }
+        return res;
+    }
+
+    public static ListNode leet2181(ListNode head) {
+        ListNode res = new ListNode(-1);
+        ListNode p = res;
+        int sum = 0;
+        head = head.next;
+        while (head != null) {
+            if (head.val != 0) {
+                sum += head.val;
+            } else {
+                p.next = new ListNode(sum);
+                p = p.next;
+                sum = 0;
+            }
+            head = head.next;
+        }
+        return res.next;
+    }
+
+    public static List<List<Integer>> offer079(int[] nums) {
+        List<Integer> temp = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        int n = nums.length;
+        for (int i = 0; i < (1 << n); i++) {
+            temp.clear();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) != 0) {
+                    temp.add(nums[j]);
+                }
+            }
+            res.add(new ArrayList<>(temp));
+        }
+        return res;
+    }
+
+    static class MagicDictionary {
+
+        List<String> dict;
+
+        public MagicDictionary() {
+            this.dict = new ArrayList<>();
+        }
+
+        public void buildDict(String[] dictionary) {
+            dict.addAll(Arrays.asList(dictionary));
+        }
+
+        public boolean search(String searchWord) {
+            int flag;
+            for (String s : dict) {
+                flag = 0;
+                if (s.length() != searchWord.length()) {
+                    continue;
+                }
+                int n = s.length();
+                for (int i = 0; i < n; i++) {
+                    if (s.charAt(i) != searchWord.charAt(i)) {
+                        flag++;
+                    }
+                }
+                if (flag == 1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    public static TreeNode offer054(TreeNode root) {
+        int sum = 0;
+        if (root != null) {
+            offer054(root.right);
+            sum += root.val;
+            root.val = sum;
+            offer054(root.left);
+        }
+        return root;
+    }
+
+    public static int[] leet735(int[] asteroids) {
+        int[] res;
+        List<Integer> temp = new ArrayList<>();
+        int n = asteroids.length, left = 0, right = 1;
+        while (right < n) {
+            if (asteroids[left++] * asteroids[right++] > 0) {
+                temp.add(asteroids[left]);
+            } else if (asteroids[left] > 0 && asteroids[right] < 0) {
+                if (Math.abs(asteroids[left]) > Math.abs(asteroids[right])) {
+                    right++;
+                } else if (Math.abs(asteroids[left]) == Math.abs(asteroids[right])) {
+                    left = right;
+                    right++;
+                } else {
+                    left++;
+                    right++;
+                }
+            } else if (asteroids[left] < 0 && asteroids[right] > 0) {
+                left++;
+                right++;
+            }
+        }
+        res = new int[temp.size()];
+        for (int i = 0; i < temp.size(); i++) {
+            res[i] = temp.get(i);
+        }
+        return res;
+    }
+
+    public static void leet73(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        boolean[] row = new boolean[m];
+        boolean[] col = new boolean[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    public static class MovingAverage {
+
+        Queue<Integer> queue;
+        int size;
+        double sum;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public MovingAverage(int size) {
+            this.queue = new ArrayDeque<>();
+            this.size = size;
+            this.sum = 0;
+        }
+
+        public double next(int val) {
+            if (queue.size() == this.size) {
+                sum -= queue.poll();
+            }
+            queue.offer(val);
+            sum += val;
+            return sum / queue.size();
+        }
+    }
+
+    @Deprecated
+    public static int leet565(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        int res = 0, temp;
+        for (int num : nums) {
+            temp = num;
+            s.add(num);
+            while (s.add(nums[temp])) {
+                temp = nums[temp];
+            }
+            res = Math.max(res, s.size());
+            s.clear();
+        }
+        return res;
+    }
+
+    public static int leet2315(String s) {
+        int flag = 0, res = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '|') {
+                flag++;
+            }
+            if (flag % 2 == 0 && c == '*') {
+                res++;
+            }
+        }
+        return res;
+    }
+
+    public static int leet1455(String sentence, String searchWord) {
+        String[] words = sentence.split(" ");
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].startsWith(searchWord)) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
+    public static int leet2367(int[] nums, int diff) {
+        int res = 0;
+        Set<Integer> hashSet = new HashSet<>();
+        for (int num : nums) {
+            hashSet.add(num);
+        }
+        for (int num : nums) {
+            if (hashSet.contains(num + diff) && hashSet.contains(num + diff + diff)) {
+                res++;
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 //        binary();
 //        leet3();
@@ -2560,5 +2862,13 @@ public final class LeetCode {
 //        System.out.println(Integer.parseInt(String.valueOf('2')));
         //leet1089(new int[]{1, 0, 2, 3, 0, 4, 5, 0});
 //        System.out.println((char) (5 + 96));
+//        System.out.println(Arrays.equals(new int[]{1, 2}, new int[]{1, 2}));
+//        List<String> s1 = new ArrayList<>();
+//        List<String> s2 = new ArrayList<>();
+//        s1.add("hello");
+//        s2.add("hello");
+//        System.out.println(s1.equals(s2));
+//        System.out.println(leet67("11", "1"));
+        System.out.println(leet1047("abbaca"));
     }
 }

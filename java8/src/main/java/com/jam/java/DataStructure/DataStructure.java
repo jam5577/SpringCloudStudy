@@ -1,4 +1,4 @@
-package com.jam.java.leet;
+package com.jam.java.DataStructure;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -37,6 +37,58 @@ public final class DataStructure {
             n--;
         }
         log.info("排序后的数组为：" + Arrays.toString(num));
+    }
+
+    /**
+     * 归并排序的拆分方法
+     *
+     * @param source 传入要排序的数组
+     * @return 返回一个数组
+     */
+    public static int[] sort(int[] source) {
+        //复制出一个数组，不修改原数组
+        int[] arr = Arrays.copyOf(source, source.length);
+        if (arr.length < 2) {
+            return arr;
+        }
+        //取中点
+        int mid = (int) Math.floor(source.length >> 1);
+        //将数组分为左右两个数组
+        int[] left = Arrays.copyOfRange(arr, 0, mid);
+        int[] right = Arrays.copyOfRange(arr, mid, arr.length);
+        return merge(sort(left), sort(right));
+    }
+
+    /**
+     * 将左右两个数组进行合并
+     *
+     * @param left  左侧数组
+     * @param right 右侧数组
+     * @return 返回排序后的数组
+     */
+    private static int[] merge(int[] left, int[] right) {
+        int[] res = new int[left.length + right.length];
+        int i = 0;
+        //先进行排序
+        while (left.length > 0 && right.length > 0) {
+            if (left[0] <= right[0]) {
+                res[i++] = left[0];
+                left = Arrays.copyOfRange(left, 1, left.length);
+            } else {
+                res[i++] = right[0];
+                right = Arrays.copyOfRange(right, 1, right.length);
+            }
+        }
+        //将剩下的数插入结果中
+        while (left.length > 0) {
+            res[i++] = left[0];
+            left = Arrays.copyOfRange(left, 1, left.length);
+        }
+        while (right.length > 0) {
+            res[i++] = right[0];
+            right = Arrays.copyOfRange(right, 1, right.length);
+        }
+        return res;
     }
 
     /**
@@ -148,12 +200,21 @@ public final class DataStructure {
         }
     }
 
+    /**
+     * 向量接口，其中存储的结构不一定是同一类型，不一定有相同初始值
+     */
+    interface Vector {
+
+    }
+
+
     public static void main(String[] args) {
         //arrayReverse(new int[]{3, 1, 4, 1, 5, 9, 2, 6}, 0, 7);
         //log.info("结果为：{}", powerCal(3));
         //System.out.println(arraySum(new int[]{3, 1, 4, 1, 5, 9, 2, 6}, 0, 7));
-        System.out.println(Fibonacci.recursive(1, 1, 10));
+        //System.out.println(Fibonacci.recursive(1, 1, 10));
         //System.out.println(Fibonacci.recursive(10));
         //System.out.println(Fibonacci.dp(10));
+        System.out.println(Arrays.toString(sort(new int[]{6, 3, 2, 7, 1, 5, 8, 4})));
     }
 }
