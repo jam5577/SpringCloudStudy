@@ -2747,6 +2747,151 @@ public final class LeetCode {
         return res;
     }
 
+    public static String leet1592(String text) {
+        int space = 0, avg;
+        String[] words = text.trim().split("\\s+");
+        if (words.length == 1) {
+            StringBuilder res = new StringBuilder(words[0]);
+            for (int i = 0; i < text.length() - words[0].length(); i++) {
+                res.append(' ');
+            }
+            return res.toString();
+        }
+        for (char c : text.toCharArray()) {
+            space += c == ' ' ? 1 : 0;
+        }
+        avg = space / (words.length - 1);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < words.length; i++) {
+            builder.append(words[i]);
+            if (i < words.length - 1) {
+                for (int j = 0; j < avg; j++) {
+                    builder.append(' ');
+                }
+            }
+        }
+        if (space > avg * (words.length - 1)) {
+            for (int j = 0; j < space - avg * (words.length - 1); j++) {
+                builder.append(' ');
+            }
+        }
+        return builder.toString();
+    }
+
+    public static boolean leet766(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][j] != matrix[i - 1][j - 1]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static int leet476(int num) {
+        String binary = Integer.toBinaryString(num);
+        StringBuilder builder = new StringBuilder();
+        for (char c : binary.toCharArray()) {
+            if (c == '0') {
+                builder.append('1');
+            } else {
+                builder.append('0');
+            }
+        }
+        return Integer.parseInt(builder.toString(), 2);
+    }
+
+    public static double leet1619(int[] arr) {
+        Arrays.sort(arr);
+        int n = arr.length, limit = (int) (n * 0.05), sum = 0;
+        for (int i = limit - 1; i < n - limit; i++) {
+            sum += arr[i];
+        }
+        return (double) (sum / (n - 2 * limit));
+    }
+
+    public static List<String> leet412(int n) {
+        List<String> answer = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
+                answer.add("FizzBuzz");
+            } else if (i % 5 == 0) {
+                answer.add("Buzz");
+            } else if (i % 3 == 0) {
+                answer.add("Fizz");
+            } else {
+                answer.add(i + "");
+            }
+        }
+        return answer;
+    }
+
+    public static boolean leet1640(int[] arr, int[][] pieces) {
+        int n = arr.length, m = pieces.length;
+        Map<Integer, Integer> index = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            index.put(pieces[i][0], i);
+        }
+        for (int i = 0; i < n; ) {
+            if (!index.containsKey(arr[i])) {
+                return false;
+            }
+            int j = index.get(arr[i]), len = pieces[j].length;
+            for (int k = 0; k < len; k++) {
+                if (arr[i + k] != pieces[j][k]) {
+                    return false;
+                }
+            }
+            i += len;
+        }
+        return true;
+    }
+
+    public static int leet1925(int n) {
+        int res = 0;
+        for (int a = 1; a <= n; a++) {
+            for (int b = 1; b <= n; b++) {
+                int c = (int) Math.sqrt(a * a + b * b + 1.0);
+                if (c <= n && c * c == a * a + b * b) {
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    public static int leet1710(int[][] boxTypes, int truckSize) {
+        Arrays.sort(boxTypes, (o1, o2) -> (o2[1] - o1[1]));
+        int ans = 0;
+        for (int i = 0; i < boxTypes.length && truckSize > 0; i++) {
+            int num = Math.min(truckSize, boxTypes[i][0]);
+            truckSize -= num;
+            ans += num * boxTypes[i][1];
+        }
+        return ans;
+    }
+
+    public static String leet1694(String number) {
+        StringBuilder builder = new StringBuilder();
+        for (char c : number.toCharArray()) {
+            if (c != ' ' && c != '-') {
+                builder.append(c);
+            }
+        }
+        int length = builder.toString().length(), remain = length % 3;
+        String[] res = new String[length / 3 + 1];
+        for (int i = 0; i < res.length; i += 3) {
+            if (i < res.length - 1) {
+                res[i] = builder.substring(i, i + 3);
+            } else {
+                res[i] = builder.substring(i);
+            }
+        }
+        return String.join("-", res);
+    }
+
     public static void main(String[] args) {
 //        binary();
 //        leet3();
@@ -2869,6 +3014,8 @@ public final class LeetCode {
 //        s2.add("hello");
 //        System.out.println(s1.equals(s2));
 //        System.out.println(leet67("11", "1"));
-        System.out.println(leet1047("abbaca"));
+//        System.out.println(leet1047("abbaca"));
+//        System.out.println(Arrays.toString("  this is    a     sentence".split(" ")));
+        System.out.println(leet1592("  this is    a     sentence"));
     }
 }
