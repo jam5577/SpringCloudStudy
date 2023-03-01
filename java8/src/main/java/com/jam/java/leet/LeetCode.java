@@ -1,5 +1,6 @@
 package com.jam.java.leet;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -2892,6 +2893,186 @@ public final class LeetCode {
         return String.join("-", res);
     }
 
+    public static int leet795(int[] nums, int left, int right) {
+        int res = 0, last1 = -1, last2 = -1;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] >= left && nums[i] <= right) {
+                last1 = i;
+            } else if (nums[i] > right) {
+                last2 = i;
+                last1 = -1;
+            }
+            if (last1 != -1) {
+                res += last1 - last2;
+            }
+        }
+        return res;
+    }
+
+    public static int leet809(String s, String[] words) {
+        int res = 0;
+        for (String word : words) {
+            if (expand(s, word)) {
+                res++;
+            }
+        }
+        return res;
+    }
+
+    private static boolean expand(String s, String word) {
+        int i = 0, j = 0, cnti = 0, cntj = 0;
+        while (i < s.length() && j < word.length()) {
+            if (s.charAt(i) != word.charAt(j)) {
+                return false;
+            }
+            char ch = s.charAt(i);
+            while (i < s.length() && ch == s.charAt(i)) {
+                cnti++;
+                i++;
+            }
+            while (j < word.length() && ch == word.charAt(j)) {
+                cntj++;
+                j++;
+            }
+            if (cnti < cntj) {
+                return false;
+            }
+            if (cnti != cntj && cnti < 3) {
+                return false;
+            }
+        }
+        return i == s.length() && j == word.length();
+    }
+
+    public char leet389(String s, String t) {
+        char[] ss = s.toCharArray();
+        Arrays.sort(ss);
+        char[] tt = t.toCharArray();
+        Arrays.sort(tt);
+        int len = Math.min(ss.length, tt.length);
+        for (int i = 0; i < len; i++) {
+            if (ss[i] != tt[i]) {
+                return tt[i];
+            }
+        }
+        return tt[tt.length - 1];
+    }
+
+    public static String leet1957(String s) {
+        int flag = 1, n = s.length();
+        char b;
+        StringBuilder sb = new StringBuilder();
+        sb.append(s.charAt(0));
+        for (int i = 1; i < n; i++) {
+            b = s.charAt(i - 1);
+            if (s.charAt(i) == b) {
+                flag++;
+            } else {
+                flag = 1;
+            }
+            if (flag < 3) {
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString();
+    }
+
+    public static List<Integer> leet1238(int n, int start) {
+        List<Integer> list = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < (1 << n); i++) {
+            list.add(i ^ (i >> 1));
+        }
+        if (list.get(0) == start) {
+            return list;
+        } else {
+            int index = list.indexOf(start);
+            res.addAll(list.subList(index, list.size()));
+            res.addAll(list.subList(0, index));
+        }
+        return res;
+    }
+
+    public static List<Integer> leet89(int n) {
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < 1 << n; i++) {
+            res.add(i ^ (i >> 1));
+        }
+        return res;
+    }
+
+    public static int leet2357(int[] nums) {
+        Set<Integer> hashSet = new HashSet<>();
+        for (int num : nums) {
+            if (num != 0) {
+                hashSet.add(num);
+            }
+        }
+        return hashSet.size();
+    }
+
+    public static boolean leet383(String ransomNote, String magazine) {
+        if (magazine.length() < ransomNote.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if (cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int[][] leet2373(int[][] grid) {
+        int n = grid.length;
+        int[][] res = new int[n - 2][n - 2];
+        for (int i = 1; i < n - 1; i++) {
+            for (int j = 1; j < n - 1; j++) {
+                int max = 0;
+                for (int k = -1; k < 2; k++) {
+                    for (int l = -1; l < 2; l++) {
+                        max = Math.max(max, grid[i + k][j + l]);
+                    }
+                }
+                res[i - 1][j - 1] = max;
+            }
+        }
+        return res;
+    }
+
+    public static int[] leet806(int[] widths, String s) {
+        int sum = 0, row = 1;
+        for (char c : s.toCharArray()) {
+            if (sum + widths[c - 'a'] <= 100) {
+                sum += widths[c - 'a'];
+            } else {
+                row++;
+                sum = widths[c - 'a'];
+            }
+        }
+        return new int[]{row, sum};
+    }
+
+    public static String[] leet796(String[] names, int[] heights) {
+        Map<Integer, String> map = new HashMap<>();
+        int length = names.length;
+        String[] res = new String[length];
+        for (int i = 0; i < length; i++) {
+            map.put(heights[i], names[i]);
+        }
+        Arrays.sort(heights);
+        for (int i = length - 1; i > -1; i--) {
+            names[i] = map.get(heights[length - i - 1]);
+        }
+        return names;
+    }
+
+
     public static void main(String[] args) {
 //        binary();
 //        leet3();
@@ -3016,6 +3197,6 @@ public final class LeetCode {
 //        System.out.println(leet67("11", "1"));
 //        System.out.println(leet1047("abbaca"));
 //        System.out.println(Arrays.toString("  this is    a     sentence".split(" ")));
-        System.out.println(leet1592("  this is    a     sentence"));
+//        System.out.println(leet1592("  this is    a     sentence"));
     }
 }

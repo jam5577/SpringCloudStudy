@@ -210,6 +210,11 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.ibm.cplex</groupId>
+            <artifactId>cplex</artifactId>
+            <version>12.10</version>
+        </dependency>
     </dependencies>
 
     <build>
