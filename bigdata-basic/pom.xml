@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.jam</groupId>
+        <artifactId>SpringCloudStudy</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <packaging>pom</packaging>
+
+    <artifactId>bigdata-basic</artifactId>
+
+    <modules>
+        <module>curator</module>
+        <module>flink-basis-java</module>
+        <module>flink-kafka-integration</module>
+        <module>flink-state-management</module>
+        <module>hadoop-word-count</module>
+        <module>hbase-observer-coprocessor</module>
+        <module>hdfs-java-api</module>
+        <module>kafka-basis</module>
+        <module>spark-streaming-basis</module>
+        <module>spark-streaming-kafka</module>
+        <module>storm-hbase-integration</module>
+        <module>storm-kafka-integration</module>
+        <module>storm-word-count</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>

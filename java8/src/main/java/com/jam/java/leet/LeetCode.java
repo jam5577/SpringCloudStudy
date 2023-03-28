@@ -1,6 +1,5 @@
 package com.jam.java.leet;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -3072,6 +3071,408 @@ public final class LeetCode {
         return names;
     }
 
+    public static String[] leet1487(String[] names) {
+        HashMap<String, Integer> map = new HashMap<>();
+        int n = names.length;
+        String[] res = new String[n];
+        for (int i = 0; i < n; i++) {
+            String name = names[i];
+            if (!map.containsKey(name)) {
+                res[i] = name;
+                map.put(name, 1);
+            } else {
+                int k = map.get(name);
+                while (map.containsKey(addSuffix(name, k))) {
+                    k++;
+                }
+                res[i] = addSuffix(name, k);
+                map.put(name, k + 1);
+                map.put(addSuffix(name, k), 1);
+            }
+        }
+        return res;
+    }
+
+    public static String addSuffix(String name, int k) {
+        return name + "(" + k + ")";
+    }
+
+    public static int leet2535(int[] nums) {
+        int n = nums.length, elSum = 0, numSum = 0;
+        for (int num : nums) {
+            elSum += num;
+            while (num > 0) {
+                numSum += num % 10;
+                num /= 10;
+            }
+        }
+        return Math.abs(elSum - numSum);
+    }
+
+    public static int leet982(int[] nums) {
+        //先将前两位按位与的结果记录到数组中，再用一次循环将最后的结果计算出来
+        int[] cnt = new int[1 << 16];
+        for (int x : nums) {
+            for (int y : nums) {
+                cnt[x & y]++;
+            }
+        }
+        int res = 0;
+        for (int x : nums) {
+            for (int mask = 0; mask < (1 << 16); mask++) {
+                if ((x & mask) == 0) {
+                    res += cnt[mask];
+                }
+            }
+        }
+        return res;
+    }
+
+    public static double[] leet2469(double celsius) {
+        return new double[]{celsius + 273.15, celsius * 1.80 + 32.00};
+    }
+
+    public static int leet2520(int num) {
+        int val, origin = num, res = 0;
+        while (num > 0) {
+            val = num % 10;
+            if (origin % val == 0) {
+                res++;
+            }
+            num /= 10;
+        }
+        System.out.println(origin);
+        return res;
+    }
+
+    public static int[] leet2553(int[] nums) {
+        StringBuilder builder = new StringBuilder();
+        for (int num : nums) {
+            builder.append(num);
+        }
+        int n = builder.toString().length();
+        int[] res = new int[n];
+        for (int i = 0; i < n; i++) {
+            res[i] = builder.toString().charAt(i) - '0';
+        }
+        return res;
+    }
+
+    public static int leet2500(int[][] grid) {
+        int n = grid.length, m = grid[0].length, res = 0;
+        for (int[] ints : grid) {
+            Arrays.sort(ints);
+        }
+        for (int i = 0; i < m; i++) {
+            int max = 0;
+            for (int[] ints : grid) {
+                max = Math.max(max, ints[i]);
+            }
+            res += max;
+        }
+        return res;
+    }
+
+    public static int leet2544(int n) {
+        char[] numbers = String.valueOf(n).toCharArray();
+        int res = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            res += (numbers[i] - '0') * Math.pow(-1, i);
+        }
+        return res;
+    }
+
+    public static int offer47(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int[][] f = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i > 0) {
+                    f[i][j] = Math.max(f[i][j], f[i - 1][j]);
+                }
+                if (j > 0) {
+                    f[i][j] = Math.max(f[i][j], f[i][j - 1]);
+                }
+                f[i][j] += grid[i][j];
+            }
+        }
+        return f[m - 1][n - 1];
+    }
+
+    public static int leet2496(String[] strs) {
+        int res = Integer.MIN_VALUE;
+        for (String str : strs) {
+            if (allDigit(str)) {
+                res = Math.max(res, Integer.parseInt(str));
+            } else {
+                res = Math.max(res, str.length());
+            }
+        }
+        return res;
+    }
+
+    private static boolean allDigit(String str) {
+        for (char c : str.toCharArray()) {
+            if (Character.digit(c, 10) < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int leet2379(String blocks, int k) {
+        int res = Integer.MAX_VALUE, n = blocks.length();
+        int[] flag = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (blocks.charAt(i) == 'W') {
+                flag[i] = 1;
+            }
+        }
+        for (int i = k - 1; i < n; i++) {
+            int ins = 0;
+            for (int j = i - k + 1; j <= i; j++) {
+                ins += flag[j];
+            }
+            res = Math.min(res, ins);
+        }
+        return res;
+    }
+
+    public static int leet2529(int[] nums) {
+        int pos = 0, neg = 0;
+        for (int num : nums) {
+            if (num < 0) {
+                pos++;
+            } else if (num > 0) {
+                neg++;
+            }
+        }
+        return Math.max(pos, neg);
+    }
+
+    public static int leet2578(int num) {
+        char[] chars = String.valueOf(num).toCharArray();
+        Arrays.sort(chars);
+        StringBuilder num1 = new StringBuilder(), num2 = new StringBuilder();
+        int n = chars.length;
+        for (int i = 0; i < n; i = i + 2) {
+            num1.append(chars[i]);
+            if (i < n - 1) num2.append(chars[i + 1]);
+        }
+        return Integer.parseInt(num1.toString()) + Integer.parseInt(num2.toString());
+    }
+
+    public static int[] leet1(int[] nums, int target) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[0];
+    }
+
+    public static long leet2562(int[] nums) {
+        int n = nums.length;
+        long res = 0;
+        for (int i = 0; i < n / 2; i++) {
+            res += nums[i] * Math.pow(10, (nums[n - i - 1] + "").length()) + nums[n - i - 1];
+        }
+        if (n % 2 != 0) {
+            res += nums[n / 2];
+        }
+        return res;
+    }
+
+    public static boolean leet2399(String s, int[] distance) {
+        int n = s.length();
+        int[] arr = new int[26];
+        Arrays.fill(arr, -1);
+        for (int i = 0; i < n; i++) {
+            int index = s.charAt(i) - 'a';
+            if (arr[index] == -1) {
+                arr[index] = i;
+            } else {
+                if (i - arr[index] - 1 != distance[index]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static String leet2309(String s) {
+        Set<Character> hashSet = new HashSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            hashSet.add(s.charAt(i));
+        }
+        for (int i = 25; i > 0; i--) {
+            if (hashSet.contains((char) ('a' + i)) && hashSet.contains((char)('A' + i))) {
+                return String.valueOf((char) ('A' + i));
+            }
+        }
+        return "";
+    }
+
+    public static boolean leet2395(int[] nums) {
+        int n = nums.length;
+        Set<Integer> hashSet = new HashSet<>();
+        for (int i = 0; i < n - 1; i++) {
+            int sum = nums[i] + nums[i + 1];
+            if (!hashSet.add(sum)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean leet2490(String sentence) {
+        String[] words = sentence.split(" ");
+        int length = words.length;
+        if (length > 1) {
+            for (int i = 0; i < length - 1; i++) {
+                if (words[i].charAt(words[i].length() - 1) != words[i + 1].charAt(0)) {
+                    return false;
+                }
+            }
+        }
+        return words[0].charAt(0) == words[length - 1].charAt(words[length - 1].length() - 1);
+    }
+
+    public static int leet2441(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length, i = 0, j = n - 1;
+        while (i < j) {
+            int num = nums[i] + nums[j];
+            if (num == 0) {
+                return nums[j];
+            }else if (num < 0) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return -1;
+    }
+
+    public static int leet1758(String s) {
+        int n = s.length(), res = 0;
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (c != ('0' + i % 2)) {
+                res++;
+            }
+        }
+        return Math.min(res, n - res);
+    }
+
+    public static int leet1189(String text) {
+        int[] res = new int[5];
+        for (char c : text.toCharArray()) {
+            if (c == 'b') {
+                res[0]++;
+            } else if (c == 'a') {
+                res[1]++;
+            } else if (c == 'l') {
+                res[2]++;
+            } else if (c == 'o') {
+                res[3]++;
+            } else if (c == 'n') {
+                res[4]++;
+            }
+        }
+        res[2] /= 2;
+        res[3] /= 2;
+        return Arrays.stream(res).min().getAsInt();
+    }
+
+    public static int[] leet977(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] * nums[i];
+        }
+        Arrays.sort(nums);
+        return nums;
+    }
+
+    public static int leet2180(int num) {
+        int res = 0;
+        for (int i = 1; i <= num; i++) {
+            int x = i, sum = 0;
+            while (x > 0) {
+                sum += x % 10;
+                x /= 10;
+            }
+            if (sum % 2 == 0) {
+                res++;
+            }
+        }
+        return res;
+    }
+
+    public static int leet1763(int[] cost) {
+        Arrays.sort(cost);
+        int length = cost.length;
+        int index = length - 1;
+        int sum = 0;
+        while (index >= 2) {
+            sum += cost[index] + cost[index - 1];
+            index -= 3;
+        }
+        while (index >= 0) {
+            sum += cost[index--];
+        }
+        return sum;
+    }
+
+    public static int leet2027(String s) {
+        int length = s.length(), index = 0;
+        for (int i = 0; i < length; i++) {
+            if (s.charAt(i) == 'X') {
+                index++;
+                i += 2;
+            }
+        }
+        return index;
+    }
+
+    public static int leet1046(int[] stones) {
+        int length = stones.length;
+        for (int i = length - 1; i > 0; i--) {
+            Arrays.sort(stones);
+            stones[length - 1] -= stones[length - 2];
+            stones[length - 2] = 0;
+        }
+        return stones[length - 1];
+    }
+
+    public static boolean leet1550(int[] arr) {
+        int length = arr.length, num = 0;
+        for (int j : arr) {
+            if (j % 2 == 0) {
+                num = 0;
+                continue;
+            }
+            num++;
+            if (num >= 3) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean leet219(int[] nums, int k) {
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j <= i + k && j < n; j++) {
+                if (nums[j] == nums[i]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
 //        binary();
@@ -3198,5 +3599,12 @@ public final class LeetCode {
 //        System.out.println(leet1047("abbaca"));
 //        System.out.println(Arrays.toString("  this is    a     sentence".split(" ")));
 //        System.out.println(leet1592("  this is    a     sentence"));
+//        System.out.println(6 % 10);
+//        System.out.println(leet2520(54));
+//        System.out.println(7 & -7);
+//        System.out.println(0 | 2);
+//        System.out.println(leet2441(new int[]{-1,10,6,7,-7,1}));
+//        System.out.println(120 & 1);
+        System.out.println(leet219(new int[]{1,2,3,1}, 3));
     }
 }

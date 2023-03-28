@@ -1,0 +1,4 @@
+server:
+  port: 9000 # Netty Server 端口
+netty:
+  port: 8888

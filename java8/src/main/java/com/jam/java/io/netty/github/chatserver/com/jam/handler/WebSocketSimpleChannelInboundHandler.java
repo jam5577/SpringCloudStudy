@@ -35,9 +35,9 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
 
     private static final Logger logger = LoggerFactory.getLogger(WebSocketSimpleChannelInboundHandler.class);
     // WebSocket 握手工厂类
-    private WebSocketServerHandshakerFactory factory = new WebSocketServerHandshakerFactory(WebSocketConstant.WEB_SOCKET_URL, null, false);
+    private final WebSocketServerHandshakerFactory factory = new WebSocketServerHandshakerFactory(WebSocketConstant.WEB_SOCKET_URL, null, false);
     private WebSocketServerHandshaker handshaker;
-    private WebSocketInfoService websocketInfoService = new WebSocketInfoService();
+    private final WebSocketInfoService websocketInfoService = new WebSocketInfoService();
 
     /**
      * 处理客户端与服务端之间的 websocket 业务
@@ -80,6 +80,7 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
             switch (code) {
                 //群聊
                 case MessageCodeConstant.GROUP_CHAT_CODE:
+                case MessageCodeConstant.SYSTEM_MESSAGE_CODE:
                     //向连接上来的客户端广播消息
                     SessionHolder.channelGroup.writeAndFlush(new TextWebSocketFrame(JSONObject.toJSONString(json)));
                     break;
@@ -102,10 +103,6 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
                         SessionHolder.channelMap.get(sendUserId).writeAndFlush(new TextWebSocketFrame(msg));
                     }
                     break;
-                case MessageCodeConstant.SYSTEM_MESSAGE_CODE:
-                    //向连接上来的客户端广播消息
-                    SessionHolder.channelGroup.writeAndFlush(new TextWebSocketFrame(JSONObject.toJSONString(json)));
-                    break;
                 //pong
                 case MessageCodeConstant.PONG_CHAT_CODE:
                     Channel channel = ctx.channel();
@@ -123,20 +120,20 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
      * 客户端与服务端创建连接的时候调用
      */
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) {
         //创建新的 WebSocket 连接，保存当前 channel
         logger.info("————客户端与服务端连接开启————");
-//        // 设置高水位
-//        ctx.channel().config().setWriteBufferHighWaterMark();
-//        // 设置低水位
-//        ctx.channel().config().setWriteBufferLowWaterMark();
+        // 设置高水位
+        //ctx.channel().config().setWriteBufferHighWaterMark();
+        // 设置低水位
+        //ctx.channel().config().setWriteBufferLowWaterMark();
     }
 
     /**
      * 客户端与服务端断开连接的时候调用
      */
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void channelInactive(ChannelHandlerContext ctx) {
         logger.info("————客户端与服务端连接断开————");
         websocketInfoService.clearSession(ctx.channel());
     }
@@ -145,7 +142,7 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
      * 服务端接收客户端发送过来的数据结束之后调用
      */
     @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+    public void channelReadComplete(ChannelHandlerContext ctx) {
         ctx.flush();
     }
 
@@ -153,7 +150,7 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
      * 工程出现异常的时候调用
      */
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         logger.error("异常:", cause);
         ctx.close();
     }
@@ -209,7 +206,7 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
             // 推送用户上线消息，更新客户端在线用户列表
             Set<String> userList = SessionHolder.channelMap.keySet();
             WsMessage msg = new WsMessage();
-            Map<String, Object> ext = new HashMap<String, Object>();
+            Map<String, Object> ext = new HashMap<>();
             ext.put("userList", userList);
             msg.setExt(ext);
             msg.setCode(MessageCodeConstant.SYSTEM_MESSAGE_CODE);
@@ -235,10 +232,6 @@ public class WebSocketSimpleChannelInboundHandler extends SimpleChannelInboundHa
         //写入请求，服务端向客户端发送数据
         ChannelFuture channelFuture = ctx.channel().writeAndFlush(response);
         if (response.status().code() != 200) {
-            /**
-             * 如果请求失败，关闭 ChannelFuture
-             * ChannelFutureListener.CLOSE 源码：future.channel().close();
-             */
             channelFuture.addListener(ChannelFutureListener.CLOSE);
         }
     }

@@ -8,10 +8,11 @@
 /SpringCloudStudy.iml/
 /blog/target/
 /blog/blog.iml/
-/God-Of-BigData-master/
-/SZT-bigdata-master/
-/advanced-java-main/
-/JavaFamily-master/
+/common/
+/ruoyi/ruoyi-ui/
+/ruoyi/sql/
+/ruoyi/doc/
+/python-project/
 #java
 *.class
 

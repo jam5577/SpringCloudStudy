@@ -9,28 +9,24 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>flink-basis-java</module>
-        <module>flink-kafka-integration</module>
-        <module>flink-state-management</module>
-        <module>hadoop-word-count</module>
-        <module>hbase-observer-coprocessor</module>
-        <module>hdfs-java-api</module>
-        <module>kafka-basis</module>
-        <module>spark-streaming-basis</module>
-        <module>spark-streaming-kafka</module>
-        <module>spring-boot-mybatis-phoenix</module>
-        <module>spring-mybatis-phoenix</module>
-        <module>storm-hbase-integration</module>
-        <module>storm-kafka-integration</module>
-        <module>storm-word-count</module>
-        <module>curator</module>
+        <module>admin-sys</module>
+        <module>quarkus-starter</module>
         <module>java8</module>
         <module>common</module>
         <module>elasticsearch</module>
         <module>blog</module>
         <module>seckill</module>
-        <module>bilimusic</module>
         <module>springboot-file</module>
+        <module>springboot-security-web</module>
+        <module>springboot-RPC</module>
+        <module>springboot-RPC/tomcat-websocket</module>
+        <module>springboot-RPC/spring-websocket</module>
+        <module>springboot-RPC/spring-netty</module>
+        <module>bigdata-basic</module>
+        <module>ruoyi</module>
+        <module>jam-plus</module>
+        <module>jam-plus/jam-system</module>
+        <module>jam-plus/jam-common</module>
     </modules>
 
     <!--统一版本管理-->
@@ -42,13 +38,13 @@
         <java.version>17</java.version>
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.20</lombok.version>
-        <spring-boot.version>2.6.3</spring-boot.version>
+        <spring-boot.version>2.6.4</spring-boot.version>
         <mybatisplus.version>3.4.0</mybatisplus.version>
         <fastjson.version>1.2.75</fastjson.version>
         <knife4j.version>3.0.1</knife4j.version>
         <druid.version>1.2.8</druid.version>
         <jsoup.version>1.10.2</jsoup.version>
-        <hutool.version>5.7.20</hutool.version>
+        <hutool.version>5.8.14</hutool.version>
         <wechat.version>4.0.0</wechat.version>
         <excel.version>3.0.5</excel.version>
         <jjwt.version>0.9.1</jjwt.version>

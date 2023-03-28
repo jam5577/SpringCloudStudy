@@ -8,24 +8,20 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <modules>
-        <module>src/main/java/com/jam/oauth/click</module>
-        <module>src/main/java/com/jam/oauth/custom-error</module>
-        <module>src/main/java/com/jam/oauth/logout</module>
-        <module>src/main/java/com/jam/oauth/simple</module>
-        <module>src/main/java/com/jam/oauth/two-providers</module>
-    </modules>
-
-
     <artifactId>springboot-security-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-security-web</name>
     <description>非前后端分离项目</description>
+    <modules>
+        <module>spring-oauth2-sso</module>
+        <module>spring-security</module>
+        <module>spring-oauth2</module>
+    </modules>
     <packaging>pom</packaging>
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <java.version>1.8</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>

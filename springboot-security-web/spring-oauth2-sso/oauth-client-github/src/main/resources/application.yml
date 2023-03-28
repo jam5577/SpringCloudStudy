@@ -1,0 +1,11 @@
+server:
+  port: 8080
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 904f77b72a4071fec5d3
+            client-secret: 961378f23af1ec94980b4a1da14eac5527cce42c
+            redirect-uri: http://localhost:8080/login/oauth2/code/github #默认的uri是code加客户端名

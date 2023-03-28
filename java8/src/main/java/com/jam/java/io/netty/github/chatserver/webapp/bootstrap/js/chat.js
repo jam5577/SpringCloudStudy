@@ -30,15 +30,15 @@ function systemMessage(data) {
             userList.text("");
             userList.append(
                 '<div class="chat_item" onClick="chooseUser(null, null)" style="z-index: ">' +
-                '<img class="avatar img-circle" src="../img/chatroom.png" style="height: 50px;width: 50px">' +
-                '<img id="redPoint" class="img-circle" src="../img/redPoint.png" style="height: 10px;width: 10px;position: absolute;left: 60;display: none">' +
+                '<img class="avatar img-circle" src="../img/chatroom.png" style="height: 50px;width: 50px" alt="">' +
+                '<img id="redPoint" class="img-circle" src="../img/redPoint.png" style="height: 10px;width: 10px;position: absolute;left: 60;display: none" alt="">' +
                 '<div style="color: white;font-size: large">群聊室</div>' +
                 '</div>');
             users.forEach(function (user) {
                 userList.append(
                     '<div class="chat_item" onClick="chooseUser(\'' + user + '\',\'' + user + '\')">' +
-                    '<img class="avatar img-circle" src=' + defaultHeadImg + ' style="height: 50px;width: 50px">' +
-                    '<img id="redPoint-' + user + '" class="img-circle" src="../img/redPoint.png" style="height: 10px;width: 10px;position: absolute;left: 60;display: none">' +
+                    '<img class="avatar img-circle" src=' + defaultHeadImg + ' style="height: 50px; width: 50px">' +
+                    '<img id="redPoint-' + user + '" class="img-circle" src="../img/redPoint.png" style="height: 10px;width: 10px;position: absolute;left: 60;display: none" alt="">' +
                     '<div style="color: white;font-size: large">' + user + '</div>' +
                     '</div>');
                 appendString =
@@ -59,7 +59,7 @@ function systemMessage(data) {
 }
 
 function websocket() {
-    me = new Object();
+    me = {};
     me.userId = GetQueryString('nick')
     if (!window.WebSocket) {
         window.WebSocket = window.MozWebSocket;
@@ -112,7 +112,7 @@ function websocket() {
                             "       <div class='chatMessgae_me'><span>" + data.msg + "</span></div>" +
                             "   </div>");
                     }
-                    if (data.sendUserId != me.userId) {
+                    if (data.sendUserId !== me.userId) {
                         updateRedPoint(data.sendUserId);
                     }
                     boxScroll(document.getElementById("responseContent-" + data.sendUserId));
